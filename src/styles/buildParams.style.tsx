@@ -10,11 +10,11 @@ export const BuildFromStyle = {
           '-moz-appearance': 'textfield',
           '-webkit-appearance': 'none'
         },
-        '&::-webkit-outer-spin-button': {
+        '&::WebkitOuterSpinButton': {
           '-webkit-appearance': 'none',
           margin: 0,
         },
-        '&::-webkit-inner-spin-button': {
+        '&::WebkitInnerSpinButton': {
           '-webkit-appearance': 'none',
           margin: 0,
         },
