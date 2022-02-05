@@ -22,11 +22,14 @@ export const BuildFromStyle = {
 }
 
 export const cardStyle: CSS.Properties = {
+    position: 'absolute',
     width: '25vw',
     backgroundColor: 'rgba(255, 255, 255, 0.55)',
-    marginLeft: '1.5em',
-    marginTop: '1em',
-    marginRight: '5vw',
+    // marginLeft: '1.5em',
+    // marginTop: '1em',
+    // marginRight: '5vw',
+    top: '1em',
+    left: '1.5em'
 }
 
 export const labelParagraph: CSS.Properties = {

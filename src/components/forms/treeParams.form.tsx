@@ -18,7 +18,7 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                             <Slider 
                                 step={1} 
                                 min={1} 
-                                max={10} 
+                                max={12} 
                                 value={props.canvasProps.depth} 
                                 onChange={(event, value) => props.onChangeHandler(event, value as number, 'depth')}/>
                         </ListItem>
@@ -26,7 +26,7 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                             <ListItemText> Root size </ListItemText>
                             <Slider step={1} 
                                     min={1} 
-                                    max={200} 
+                                    max={600} 
                                     value={props.canvasProps.rootSize} 
                                     onChange={(event, value) => props.onChangeHandler(event, value as number, 'rootSize')}/>
                         </ListItem>
@@ -37,6 +37,22 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                                     max={Math.PI / 2 - 0.0001} 
                                     value={props.canvasProps.angle} 
                                     onChange={(event, value) => props.onChangeHandler(event, value as number, 'angle')}/>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText> X </ListItemText>
+                            <Slider step={1} 
+                                    min={0} 
+                                    max={window.innerWidth} 
+                                    value={props.canvasProps.x} 
+                                    onChange={(event, value) => props.onChangeHandler(event, value as number, 'x')}/>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText> Y </ListItemText>
+                            <Slider step={1} 
+                                    min={0} 
+                                    max={window.innerHeight * 1.5} 
+                                    value={props.canvasProps.y} 
+                                    onChange={(event, value) => props.onChangeHandler(event, value as number, 'y')}/>
                         </ListItem>
                     </List>
             </Card>

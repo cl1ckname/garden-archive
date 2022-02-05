@@ -4,6 +4,8 @@ import { MyForm } from './components/forms/treeParams.form';
 import { TreeCanvas, CanvasProps } from './components/canvas.component'
 
 const defaultSettings = { 
+	x: window.innerWidth / 2,
+	y: window.innerHeight * 2 / 3,
 	canvasSize: 900, 
 	angle: Math.PI / 4, 
 	depth: 1, 
@@ -26,7 +28,7 @@ function App() {
 				canvasProps={canvasProps}
 				onChangeHandler={(event, value, type) => changeHandler(event, value as number, type)}
 			/>
-			<TreeCanvas canvasSize={900} depth={canvasProps.depth} rootSize={canvasProps.rootSize} angle={canvasProps.angle} />
+			<TreeCanvas x={canvasProps.x} y={canvasProps.y} depth={canvasProps.depth} rootSize={canvasProps.rootSize} angle={canvasProps.angle} />
 		</div>
 	);
 }
