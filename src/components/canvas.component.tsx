@@ -42,23 +42,36 @@ const TriangleFigure = PixiComponent<TriangleProps, Graphics>('Triangle', {
 	},
 })
 
+interface CanvasProps {
+	canvasSize: number
+	depth: number
+	angle: number
+}
 
-
-export class TreeCanvas extends React.Component {
-    canvasSize = 900
-	iters = 4
-	angle = Math.PI / 6
+export class TreeCanvas extends React.Component<CanvasProps> {
 
 	leafs: Square[] = [Square.build(400, 800, 100, 0)]
 	branches: Square[] = []
 	nodes: Triangle[] = []
 	newNodes: Triangle[] = []
 
-    render() {
+	constructor(props: CanvasProps) {
+		super(props)
+		this.state = {
+			depth: 3
+		}
+		this.updateDepth = this.updateDepth.bind(this)
+	}
 
-		for (let i = 0; i < this.iters; i++) {
+	updateDepth(value: number) {
+		this.setState({depth: value})
+	}
+
+    render() {
+		const {canvasSize, depth, angle} = this.props
+		for (let i = 0; i < depth; i++) {
 			for (const leaf of this.leafs)
-				this.newNodes.push(leaf.getNextTriangle(this.angle))
+				this.newNodes.push(leaf.getNextTriangle(angle))
 			this.branches = this.branches.concat(this.leafs)
 			this.leafs = []
 			for (const node of this.newNodes)
@@ -67,7 +80,7 @@ export class TreeCanvas extends React.Component {
 			this.newNodes = []
 		}
         return <div style={canvas}>
-          <Stage options={{backgroundAlpha: 0}} width={this.canvasSize} height={this.canvasSize}>
+          <Stage options={{backgroundAlpha: 0}} width={canvasSize} height={canvasSize}>
 			{this.branches.map(s => {return <SquareFigure square={s} color={0x99AA9}/>})}
 			{this.nodes.map(t => {return <TriangleFigure triangle={t} color={0x99ff99}/>})}
           </Stage>
