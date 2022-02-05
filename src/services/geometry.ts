@@ -39,17 +39,6 @@ export class Point {
 
 export class Figure {
     points: Point[] = []
-    // x: number
-    // y: number
-    // size: number
-    // angle: number
-
-    // constructor(x: number, y: number, size: number, angle: number) {
-    //     this.x = x
-    //     this.y = y
-    //     this.size = size
-    //     this.angle = angle
-    // }
 
     rotate(x: number, y: number, angle: number): void {
         const c = Math.cos(angle)
@@ -117,15 +106,6 @@ export class Triangle extends Figure {
     }
 
     getRightSquare(): Square {
-        // const p1 = this.points[0]
-        // const p2 = this.points[1]
-        // const p3 = this.points[2]
-        // const size = p2.sub(p3).len()
-        // const leftDerectVec = p2.sub(p1).norm().mul(size)
-        // const sp4 = p2.add(leftDerectVec)
-        // const sp3 = p3.add(leftDerectVec)
-        // console.log(p2, p3, sp3, sp4)
-        // return new Square(sp4, sp3, p2, p3);
         const p1 = this.points[2]
         const p2 = this.points[1]
         const p3 = this.points[0]

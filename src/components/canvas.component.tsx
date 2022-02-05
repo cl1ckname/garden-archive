@@ -6,7 +6,7 @@ import { SquareFigure, TriangleFigure } from "../components/geometric/primitives
 
 
 
-interface CanvasProps {
+export interface CanvasProps {
 	canvasSize: number
 	rootSize: number
 	depth: number
