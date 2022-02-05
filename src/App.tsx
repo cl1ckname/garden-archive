@@ -1,22 +1,30 @@
 import { ChangeEvent, useState } from 'react';
 import './App.css';
-import { MyForm } from './components/buildParams.form';
+import { MyForm } from './components/forms/treeParams.form';
 import {TreeCanvas} from './components/canvas.component'
 
 function App() {
-  const [value, setValue] = useState<number>(1)
-  const cnv = new TreeCanvas({angle: Math.PI / 4, canvasSize: 900, depth: value})
-  const changeHandler = (event: ChangeEvent<{}>, value: number) => {
+  const [depth, setDepthValue] = useState<number>(1)
+  const [rootSize, setRootSizeValue] = useState<number>(100)
+
+  const changeDepthHandler = (event: ChangeEvent<{}>, value: number) => {
       event.preventDefault()
-      setValue(value)
-      cnv.updateDepth(value)
-      console.log(value)
+      setDepthValue(value)
   }
+
+  const changeRootSizeHandler = (event: ChangeEvent<{}>, value: number) => {
+    event.preventDefault()
+    setRootSizeValue(value)
+}
   return (
     <div className="App">
-        <MyForm value={value} onChange={(event, value) => changeHandler(event, value as number)}/>
-        {/* <TreeCanvas angle={Math.PI / 4} canvasSize={900} depth={4}/> */}
-        {cnv.render()}
+        <MyForm 
+          depth={depth}
+          rootSize={rootSize}
+          onDepthChange={(event, value) => changeDepthHandler(event, value as number)}
+          onRootSizeChange={(event, value) => changeRootSizeHandler(event, value as number)}
+          />
+        <TreeCanvas canvasSize={900} depth={depth} rootSize={rootSize} angle={Math.PI / 4}/>
     </div>
   );
 }
