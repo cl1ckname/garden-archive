@@ -1,3 +1,4 @@
+import { Geometry, Graphics } from "pixi.js"
 
 
 export class Point {
@@ -72,6 +73,16 @@ export class Square extends Figure {
         square.rotate(x, y, angle)
         return square
     }
+
+    draw(ins: Graphics) {
+        ins.beginFill(0x99AA9)
+        ins.moveTo(this.points[0].x, this.points[0].y)
+        for (const p of this.points) {
+            ins.lineTo(p.x, p.y)
+        }
+        ins.lineTo(this.points[0].x, this.points[0].y)
+        ins.endFill()
+    }
     
     getNextTriangle(angle: number): Triangle {
         const p1 = this.points[0]
@@ -97,6 +108,15 @@ export class Triangle extends Figure {
         const p3 = new Point(x, y - size * 2 / 3)
         const triangle = new Triangle(p1, p2, p3)
         triangle.rotate(x, y, angle)
+    }
+
+    draw (ins: Graphics) {
+        ins.beginFill(0x99ff99)
+        ins.moveTo(this.points[0].x, this.points[0].y)
+        for (let i = this.points.length; i--;) {
+            ins.lineTo(this.points[i].x, this.points[i].y)
+        }
+        ins.endFill()
     }
 
     getLeftSquare(): Square {

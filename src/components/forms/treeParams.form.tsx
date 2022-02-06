@@ -18,7 +18,7 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                             <Slider 
                                 step={1} 
                                 min={1} 
-                                max={17} 
+                                max={20} 
                                 value={props.canvasProps.depth} 
                                 onChange={(event, value) => props.onChangeHandler(event, value as number, 'depth')}/>
                         </ListItem>
