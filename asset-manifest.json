@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pifagorios_tree/static/css/main.7172e777.css",
-    "main.js": "/pifagorios_tree/static/js/main.b3610200.js",
-    "static/js/787.6b6657bd.chunk.js": "/pifagorios_tree/static/js/787.6b6657bd.chunk.js",
-    "index.html": "/pifagorios_tree/index.html",
-    "main.7172e777.css.map": "/pifagorios_tree/static/css/main.7172e777.css.map",
-    "main.b3610200.js.map": "/pifagorios_tree/static/js/main.b3610200.js.map",
-    "787.6b6657bd.chunk.js.map": "/pifagorios_tree/static/js/787.6b6657bd.chunk.js.map"
+    "main.css": "/cl1ckname.github.io/static/css/main.64e26c4c.css",
+    "main.js": "/cl1ckname.github.io/static/js/main.7eec86b0.js",
+    "static/js/787.6b6657bd.chunk.js": "/cl1ckname.github.io/static/js/787.6b6657bd.chunk.js",
+    "index.html": "/cl1ckname.github.io/index.html",
+    "main.64e26c4c.css.map": "/cl1ckname.github.io/static/css/main.64e26c4c.css.map",
+    "main.7eec86b0.js.map": "/cl1ckname.github.io/static/js/main.7eec86b0.js.map",
+    "787.6b6657bd.chunk.js.map": "/cl1ckname.github.io/static/js/787.6b6657bd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7172e777.css",
-    "static/js/main.b3610200.js"
+    "static/css/main.64e26c4c.css",
+    "static/js/main.7eec86b0.js"
   ]
 }
