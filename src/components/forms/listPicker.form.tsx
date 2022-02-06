@@ -13,7 +13,6 @@ import { Accordion,
 import React, { ChangeEvent } from "react";
 import { ColorCollectionElement } from "../../services/colorFunctionCollection";
 import { ExpandMore, Done, ColorLens } from "@material-ui/icons";
-import { CanvasProps } from "../canvas.component";
 
 export interface ListPickerProps {
     colorList: ColorCollectionElement[]

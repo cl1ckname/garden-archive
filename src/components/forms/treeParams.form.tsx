@@ -1,4 +1,4 @@
-import { Card, List, ListItemText, ListItem, Slider, FormControl } from "@material-ui/core"
+import { Card, List, ListItemText, ListItem, Slider } from "@material-ui/core"
 import { ChangeEvent, SetStateAction } from "react"
 import { ColorCollection } from "../../services/colorFunctionCollection"
 import { cardStyle } from "../../styles/buildParams.style"
@@ -61,10 +61,7 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                             <ListPicker classes={{listItemClicked: 'ActiveColor', listItemNotClicked: 'UnActiveColor'}} 
                                         colorList={ColorCollection}
                                         onChangeHandle={(event, value) => props.onChangeHandler(event, Number.parseInt(value), 'colorFunction')}
-                                        colorFunction={props.canvasProps.colorFunction}
-                                        >
-                                        
-
+                                        colorFunction={props.canvasProps.colorFunction}>                                        
                             </ListPicker>
                         </ListItem>
                     </List>

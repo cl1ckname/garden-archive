@@ -1,6 +1,6 @@
 import { PixiComponent } from "@inlet/react-pixi"
 import { Graphics } from "pixi.js"
-import { ColorCollection, ColorFunction } from "../../services/colorFunctionCollection"
+import { ColorCollection } from "../../services/colorFunctionCollection"
 import { Square, Triangle } from "../../services/geometry"
 
 
@@ -19,7 +19,7 @@ export const Tree = PixiComponent<TreeProps, Graphics>('Tree', {
     create: () => new Graphics(),
     applyProps: (ins, _, props) => {
         const { x, y, depth, angle, rootSize } = props.options
-        const leafs: Square[] = [Square.build(x, y, rootSize, 0)]
+        const leafs: Square[] = [Square.build({x, y, size: rootSize, depth, number: 1, angle: 0})]
         const nodes: Triangle[] = []
 
         ins.clear()
