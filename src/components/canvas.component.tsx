@@ -3,7 +3,10 @@ import React from "react";
 import { Tree } from "./geometric/tree.component"
 import Viewport from "./viewport.component";
 
-export interface CanvasProps {
+export interface RenderParams {
+	viewport: number
+}
+export interface DrawParams {
 	x: number
 	y: number
 	rootSize: number
@@ -11,18 +14,19 @@ export interface CanvasProps {
 	angle: number
 	colorFunction: number
 }
+export interface CanvasProps {
+	treeParams: DrawParams
+	renderProps: RenderParams
+}
+
 
 export const TreeCanvas: React.FC<CanvasProps> = (props: CanvasProps) => {
-	const mouseHandler = (event: React.MouseEvent<HTMLCanvasElement>) => {
-		console.log(event.type, event.clientX, event.clientY, event.button)
-		
-	}
-
-	return <Stage options={{ backgroundAlpha: 0 }} 
-				  width={window.innerWidth} 
-				  height={window.innerHeight}>
-		<Viewport width={window.innerWidth} height={window.innerHeight}>
-			<Tree options={props}/>
-		</Viewport>
+	const canvas = (!!props.renderProps.viewport) ? <Viewport width={window.innerWidth} height={window.innerHeight}>
+														<Tree drawParams={props.treeParams} renderParams={props.renderProps} />
+													</Viewport> : <Tree drawParams={props.treeParams} renderParams={props.renderProps} />
+	return <Stage options={{ backgroundAlpha: 0 }}
+		width={window.innerWidth}
+		height={window.innerHeight}>
+		{canvas}
 	</Stage>
 }

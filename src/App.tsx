@@ -1,40 +1,49 @@
 import { ChangeEvent, useState } from 'react';
 import './App.css';
 import { MyForm } from './components/forms/treeParams.form';
-import { TreeCanvas, CanvasProps } from './components/canvas.component'
+import { TreeCanvas, CanvasProps, DrawParams, RenderParams } from './components/canvas.component'
 
 const defaultSettings: CanvasProps = { 
-	x: window.innerWidth / 2,
-	y: window.innerHeight * 2 / 3,
-	angle: Math.PI / 4, 
-	depth: 3, 
-	rootSize: 100,
-	colorFunction: 1 
+	treeParams: {
+		x: window.innerWidth / 2,
+		y: window.innerHeight * 2 / 3,
+		angle: Math.PI / 4, 
+		depth: 3, 
+		rootSize: 100,
+		colorFunction: 1
+	},
+	renderProps: {
+		viewport: 1
+	}
 }
 
 function App() {
-	const [canvasProps, setCanvasProps] = useState<CanvasProps>(defaultSettings)
+	const [drawProps, setTreeProps] = useState<DrawParams>(defaultSettings.treeParams)
+	const [renderProps, setRenderProps] = useState<RenderParams>(defaultSettings.renderProps)
 
-	const changeHandler = (event: ChangeEvent<{}>, value: number, key: keyof CanvasProps) => {
+	const changeTreeHandler = (event: ChangeEvent<{}>, value: number, key: keyof DrawParams) => {
 		event.preventDefault()
-		const propsCopy = Object.assign({}, canvasProps)
+		const propsCopy = Object.assign({}, drawProps)
 		propsCopy[key] = value	
-		setCanvasProps(propsCopy)
+		setTreeProps(propsCopy)
+	}
+
+	const changeRenderHandler = (event: ChangeEvent<{}>, value: number, key: keyof RenderParams) => {
+		event.preventDefault()
+		const propsCopy = Object.assign({}, renderProps)
+		propsCopy[key] = value
+		setRenderProps(propsCopy)
 	}
 
 	return (
 		<div className="App">
 			<MyForm
-				canvasProps={canvasProps}
-				onChangeHandler={(event, value, type) => changeHandler(event, value as number, type)}
-				setCanvasProps={setCanvasProps}
+				drawProps={drawProps}
+				renderParams={renderProps}
+				drawChangeHandler={(event, value, type) => changeTreeHandler(event, value as number, type)}
+				renderChangeHandler={(event, value, type) => changeRenderHandler(event, value as number, type)}
 			/>
-			<TreeCanvas x={canvasProps.x} 
-						y={canvasProps.y} 
-						depth={canvasProps.depth} 
-						rootSize={canvasProps.rootSize} 
-						angle={canvasProps.angle} 
-						colorFunction={canvasProps.colorFunction}/>
+			<TreeCanvas treeParams={drawProps} renderProps={renderProps}/>
 		</div>
 	);
 }

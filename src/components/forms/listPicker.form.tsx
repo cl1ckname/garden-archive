@@ -6,13 +6,12 @@ import { Accordion,
     ListItem, 
     RadioGroup, 
     Typography, 
-    Radio, 
     FormControlLabel, 
-    FormControl, 
-    RadioProps } from "@material-ui/core"
+    FormControl } from "@material-ui/core"
 import React, { ChangeEvent } from "react";
 import { ColorCollectionElement } from "../../services/colorFunctionCollection";
 import { ExpandMore, Done, ColorLens } from "@material-ui/icons";
+import { ColorPickerRadio } from "./inputs/ColorSchemeRadio";
 
 export interface ListPickerProps {
     colorList: ColorCollectionElement[]
@@ -20,18 +19,6 @@ export interface ListPickerProps {
     onChangeHandle: ((event: ChangeEvent<HTMLInputElement>, value: string) => void)
     colorFunction: number
 }
-
-function ColorPickerRadio(props: RadioProps) {
-    return (
-      <Radio
-        disableRipple
-        color="default"
-        checkedIcon={<Done style={{ color: "rgb(239, 239, 239)", fontSize: "2.2rem" }}/>}
-        icon={<ColorLens style={{ color: "rgb(239, 239, 239)", fontSize: "2.2rem" }}/>}
-        {...props}
-      />
-    );
-  }
 
 
 export const ListPicker: React.FC<ListPickerProps> = (props: ListPickerProps) => {
