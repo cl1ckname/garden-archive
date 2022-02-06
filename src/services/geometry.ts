@@ -54,10 +54,13 @@ export class Figure {
 
 export class Square extends Figure {
     points: Point[]
-    
-        constructor(p1: Point, p2: Point, p3: Point, p4: Point) {
+    number: number
+    size: number
+        constructor(p1: Point, p2: Point, p3: Point, p4: Point, number: number = 1) {
             super()
            this.points = [p1, p2, p3 ,p4]
+           this.number = number
+           this.size = p1.sub(p2).len()
         }
 
     public static build(x: number, y: number, size:number, angle:number = 0) {
@@ -76,17 +79,19 @@ export class Square extends Figure {
         const o = p1.add(p2.sub(p1).mul(0.5))
         const rotateAngle = 2*angle
         const p3 = o.rotate(p1, rotateAngle)
-        return new Triangle(p1, p3, p2)
+        return new Triangle(p1, p3, p2, this.number)
     }
 }
 
 export class Triangle extends Figure {
-    constructor(p1: Point, p2: Point, p3: Point) {
+    number: number
+    constructor(p1: Point, p2: Point, p3: Point, number: number = 1) {
         super()
         this.points = [p1,p2,p3]
+        this.number = number
     }
 
-    public static build(x: number, y: number, size:number, angle:number = 0) {
+    public static build(x: number, y: number, size:number, angle: number = 0) {
         const p1 = new Point(x - size / 2, y + size / 3)
         const p2 = new Point(x + size / 2, y + size / 3)
         const p3 = new Point(x, y - size * 2 / 3)

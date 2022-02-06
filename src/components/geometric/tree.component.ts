@@ -4,43 +4,6 @@ import { Square, Triangle } from "../../services/geometry"
 import { CanvasProps } from "../canvas.component"
 
 
-interface RectangleProps {
-    square: Square
-    color: number
-}
-
-interface TriangleProps {
-    triangle: Triangle
-    color: number
-}
-
-export const SquareFigure = PixiComponent<RectangleProps, Graphics>('Rectangle', {
-    create: () => new Graphics(),
-    applyProps: (ins, _, props) => {
-        ins.clear()
-        ins.beginFill(props.color)
-        ins.moveTo(props.square.points[0].x, props.square.points[0].y)
-        for (const p of props.square.points) {
-            ins.lineTo(p.x, p.y)
-        }
-        ins.lineTo(props.square.points[0].x, props.square.points[0].y)
-        ins.endFill()
-    },
-})
-
-export const TriangleFigure = PixiComponent<TriangleProps, Graphics>('Triangle', {
-    create: () => new Graphics(),
-    applyProps: (ins, _, props) => {
-        ins.clear()
-        ins.beginFill(props.color)
-        ins.moveTo(props.triangle.points[0].x, props.triangle.points[0].y)
-        for (const p of props.triangle.points) {
-            ins.lineTo(p.x, p.y)
-        }
-        ins.endFill()
-    },
-})
-
 export const Tree = PixiComponent<CanvasProps, Graphics>('Tree', {
     create: () => new Graphics(),
     applyProps: (ins, _, props) => {
@@ -51,12 +14,19 @@ export const Tree = PixiComponent<CanvasProps, Graphics>('Tree', {
         const newNodes: Triangle[] = []
 
         for (let i = 0; i < depth; i++) {
-            for (const leaf of leafs)
+            for (const leaf of leafs){
                 newNodes.push(leaf.getNextTriangle(angle))
+            }
             branches.push(...leafs)
             leafs.splice(0, leafs.length)
-            for (const node of newNodes)
-                leafs.push(node.getLeftSquare(), node.getRightSquare())
+            for (const node of newNodes){
+                const lSquare = node.getLeftSquare()
+                const rSquare = node.getRightSquare()
+                if (lSquare.size > 1)
+                    leafs.push(lSquare)
+                if (rSquare.size > 1)
+                    leafs.push(rSquare)
+            }
             nodes.push(...newNodes)
             newNodes.splice(0, newNodes.length)
         }
