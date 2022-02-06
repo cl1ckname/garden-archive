@@ -1,13 +1,16 @@
 import { Card, List, ListItemText, ListItem, Slider, FormControl } from "@material-ui/core"
-import { ChangeEvent } from "react"
+import { ChangeEvent, SetStateAction } from "react"
+import { ColorCollection } from "../../services/colorFunctionCollection"
 import { cardStyle } from "../../styles/buildParams.style"
 import { CanvasProps } from "../canvas.component"
+import { ListPicker } from "./listPicker.form"
 
 
 
 export interface FormProps {
     canvasProps: CanvasProps
     onChangeHandler: (event: ChangeEvent<{}>, value: number, type: keyof CanvasProps) => void
+    setCanvasProps: ((value: SetStateAction<CanvasProps>) => void)
 } 
 export const MyForm: React.FC<FormProps> = (props: FormProps) => {
     return <div>
@@ -53,6 +56,16 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                                     max={window.innerHeight * 1.5} 
                                     value={props.canvasProps.y} 
                                     onChange={(event, value) => props.onChangeHandler(event, value as number, 'y')}/>
+                        </ListItem>
+                        <ListItem>
+                            <ListPicker classes={{listItemClicked: 'ActiveColor', listItemNotClicked: 'UnActiveColor'}} 
+                                        colorList={ColorCollection}
+                                        onChangeHandle={(event, value) => props.onChangeHandler(event, Number.parseInt(value), 'colorFunction')}
+                                        colorFunction={props.canvasProps.colorFunction}
+                                        >
+                                        
+
+                            </ListPicker>
                         </ListItem>
                     </List>
             </Card>

@@ -1,13 +1,24 @@
 import { PixiComponent } from "@inlet/react-pixi"
 import { Graphics } from "pixi.js"
+import { ColorCollection, ColorFunction } from "../../services/colorFunctionCollection"
 import { Square, Triangle } from "../../services/geometry"
-import { CanvasProps } from "../canvas.component"
 
 
-export const Tree = PixiComponent<CanvasProps, Graphics>('Tree', {
+export interface TreeProps {
+    options: {
+        x: number
+        y: number
+        rootSize: number
+        depth: number
+        angle: number
+        colorFunction: number
+    }
+}
+
+export const Tree = PixiComponent<TreeProps, Graphics>('Tree', {
     create: () => new Graphics(),
     applyProps: (ins, _, props) => {
-        const { x, y, depth, angle, rootSize } = props
+        const { x, y, depth, angle, rootSize } = props.options
         const leafs: Square[] = [Square.build(x, y, rootSize, 0)]
         const nodes: Triangle[] = []
 
@@ -15,7 +26,7 @@ export const Tree = PixiComponent<CanvasProps, Graphics>('Tree', {
         for (let i = 0; i < depth; i++) {
             while (leafs.length > 0) {
                 nodes.push(leafs[0].getNextTriangle(angle))
-                leafs[0].draw(ins)
+                leafs[0].draw(ins, ColorCollection[props.options.colorFunction].func)
                 leafs.splice(0, 1)
             }
 
@@ -27,7 +38,7 @@ export const Tree = PixiComponent<CanvasProps, Graphics>('Tree', {
                     leafs.push(lSquare)
                 if (rSquare.size > 2)
                     leafs.push(rSquare)
-                node.draw(ins)
+                node.draw(ins, ColorCollection[props.options.colorFunction].func)
                 nodes.splice(0,1)
             }
 
