@@ -1,7 +1,18 @@
-import { Accordion, AccordionDetails, AccordionSummary, Divider, List, ListItem, ListItemIcon, ListItemText, RadioGroup, Typography, Radio, FormControlLabel, FormControl } from "@material-ui/core"
+import { Accordion, 
+    AccordionDetails, 
+    AccordionSummary, 
+    Divider, 
+    List, 
+    ListItem, 
+    RadioGroup, 
+    Typography, 
+    Radio, 
+    FormControlLabel, 
+    FormControl, 
+    RadioProps } from "@material-ui/core"
 import React, { ChangeEvent } from "react";
 import { ColorCollectionElement } from "../../services/colorFunctionCollection";
-import { ExpandMore, Done } from "@material-ui/icons";
+import { ExpandMore, Done, ColorLens } from "@material-ui/icons";
 import { CanvasProps } from "../canvas.component";
 
 export interface ListPickerProps {
@@ -11,67 +22,58 @@ export interface ListPickerProps {
     colorFunction: number
 }
 
+function ColorPickerRadio(props: RadioProps) {
+    return (
+      <Radio
+        disableRipple
+        color="default"
+        checkedIcon={<Done style={{ color: "rgb(239, 239, 239)", fontSize: "2.2rem" }}/>}
+        icon={<ColorLens style={{ color: "rgb(239, 239, 239)", fontSize: "2.2rem" }}/>}
+        {...props}
+      />
+    );
+  }
+
+
 export const ListPicker: React.FC<ListPickerProps> = (props: ListPickerProps) => {
-
-    // let handleClick = (item: ColorCollectionElement) => {
-    //     const e = new Event('change', { bubbles: true })
-    //     props.colorFunction = item.id
-    //     const propsCopy = Object.assign({}, props.canvasProps)
-    //     propsCopy.colorFunction = item.id
-    //     props.setCanvasProps(propsCopy)
-    // }
-
-
-    // handleClick = handleClick.bind(this);
 
     const { classes } = props;
 
+    const listItems = props.colorList.map((item) => (
+            <><ListItem key={item.name} className={
+                                props.colorFunction === item.id
+                                ? classes.listItemClicked
+                                : classes.listItemNotClicked
+                        }
+                        style={{ width: '100%' }}   
+                    >
+                    <FormControlLabel 
+                        value={item.id} 
+                        control={<ColorPickerRadio />} 
+                        label={item.name} 
+                        key={item.name} 
+                        style={{ width: '100%' }}/>
+                </ListItem>
+            <Divider /></>
+    ))
 
     return <FormControl style={{ width: '100%' }}>
-        <Accordion>
+        <Accordion style={{backgroundColor: 'rgba(255, 255, 255, 0.3)'}}>
             <AccordionSummary
                 expandIcon={<ExpandMore />}
                 aria-controls="panel1a-content"
-                id="panel1a-header">
-                <Typography>Color</Typography>
+                id="panel1a-header"
+                >
+                <Typography>Color:    {props.colorList[props.colorFunction].name}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <List>
+                <List style={{ width: '100%' }}>
                     <RadioGroup
                         value={props.colorFunction}
                         name="controlled-radio-buttons-group"
                         onChange={props.onChangeHandle}
                     >
-                        {props.colorList.map((item) => (
-                            <>
-                                <FormControlLabel 
-                                    value={item.id} 
-                                    control={<Radio />} 
-                                    label={item.name} 
-                                    key={item.name} 
-                                    />
-                                <ListItem
-                                    key={item.name}
-                                    className={
-                                        props.colorFunction === item.id
-                                            ? classes.listItemClicked
-                                            : classes.listItemNotClicked
-                                    }
-                                >
-                                    <ListItemIcon>
-                                        {props.colorFunction === item.id
-                                            && (
-                                                <Done
-                                                    style={{ color: "rgb(239, 239, 239)", fontSize: "2.2rem" }}
-                                                />
-                                            )
-                                        }
-                                    </ListItemIcon>
-                                    <ListItemText primary={item.name} />
-                                </ListItem>
-                                <Divider />
-                            </>
-                        ))}
+                        {listItems}
                     </RadioGroup>
                 </List>
             </AccordionDetails>
