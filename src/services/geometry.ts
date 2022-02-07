@@ -88,7 +88,6 @@ export const makeFigures: figureMaker = (angle:number, ins: Graphics, getColor: 
         const p = f.points
         let size = Math.pow(p[0].x - p[1].x, 2) + Math.pow(p[0].y - p[1].y, 2)
         const ldv = Math.sqrt( size / (Math.pow(p[1].x - p[2].x, 2) + Math.pow(p[1].y - p[2].y, 2 )))
-        // let leftDerectVec = p[1].sub(p[2]).norm().mul(size)
         let sp3 = {x: p[0].x + (p[1].x - p[2].x)*ldv, y: p[0].y + (p[1].y - p[2].y)*ldv}
         let sp4 = {x: p[1].x + (p[1].x - p[2].x)*ldv, y: p[1].y + (p[1].y - p[2].y)*ldv}
         ins.beginFill(getColor('square', f.number))
@@ -99,12 +98,10 @@ export const makeFigures: figureMaker = (angle:number, ins: Graphics, getColor: 
         ins.endFill()
         let fl: figure = {points:[sp3, sp4, p[1], p[0]], number:  f.number * 2};
 
-        // const rightDerectVec = p[1].sub(p[0]).norm().mul(size)
         size = Math.pow(p[1].x - p[2].x, 2) + Math.pow(p[1].y - p[2].y, 2)
         const rdv = Math.sqrt( size /  (Math.pow(p[1].x - p[0].x, 2) + Math.pow(p[1].y - p[0].y, 2 )))
-        // sp4 = p[1].add(rightDerectVec)
         sp4 = {x: p[1].x + (p[1].x - p[0].x)*rdv, y: p[1].y + (p[1].y - p[0].y)*rdv}
-        sp3 = {x: p[2].x + (p[1].x - p[0].x)*ldv, y: p[2].y + (p[1].y - p[0].y)*ldv}
+        sp3 = {x: p[2].x + (p[1].x - p[0].x)*rdv, y: p[2].y + (p[1].y - p[0].y)*rdv}
         ins.beginFill(getColor('square', f.number))
         ins.moveTo(sp4.x, sp4.y)
         ins.lineTo(sp3.x, sp3.y)
