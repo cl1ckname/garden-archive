@@ -1,4 +1,5 @@
-import { Card, List, ListItemText, ListItem, Slider, Grid, Checkbox, FormControlLabel } from "@material-ui/core"
+import { Card, List, ListItemText, ListItem, Slider, Grid, Checkbox, FormControlLabel, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core"
+import { ExpandMore } from "@material-ui/icons"
 import { ChangeEvent, SetStateAction } from "react"
 import { ColorCollection } from "../../services/colorFunctionCollection"
 import { cardStyle } from "../../styles/buildParams.style"
@@ -16,6 +17,11 @@ export interface FormProps {
 export const MyForm: React.FC<FormProps> = (props: FormProps) => {
     return <div>
         <Card style={cardStyle}>
+        <Accordion style={{backgroundColor: 'rgba(255, 255, 255, 0)'}}>
+            <AccordionSummary expandIcon={<ExpandMore />}>
+                Settings
+            </AccordionSummary>
+            <AccordionDetails style={{flexDirection: 'column'}}>
             <Grid container>
                 <Grid item xs={4}>
                     <FormControlLabel control={<Checkbox defaultChecked  color="default"/>} 
@@ -99,6 +105,8 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                     </ListPicker>
                 </ListItem>
             </List>
+            </AccordionDetails>
+            </Accordion>
         </Card>
     </div>
 }
