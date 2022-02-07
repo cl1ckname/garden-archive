@@ -54,25 +54,12 @@ export const Tree = PixiComponent<TreeProps, Graphics>('Tree', {
         const { x, y, depth, angle, rootSize, colorFunction } = props.drawParams
         const { viewport } = props.renderParams
         const getColor =  ColorCollection[colorFunction].func
-        
+
         ins.clear()
         // const drawFigure = makeDrawer(ins, getColor)
         const [triangle, square] = makeFigures(angle, ins, getColor)
+        square(squareThroughtCoordinates(x, y, rootSize, 1), depth)
 
-        const leafs: figure[] = [squareThroughtCoordinates(x, y, rootSize, 1)]
-        const nodes: figure[] = []
-
-        for (let i = 0; i < depth; i++) {
-            leafs.map(leaf => {
-                nodes.push(square(leaf))
-            })
-            leafs.length = 0
-            nodes.map(node => {
-                leafs.push(...triangle(node))
-            })
-            nodes.length = 0
-
-        }
         const t2 = performance.now()
         console.log(t2-t1)
     }

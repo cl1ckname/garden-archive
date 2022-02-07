@@ -76,15 +76,16 @@ export type figure = {
     points: {x: number, y: number}[]
     number: number
 }
-type squareType = ((f: figure) => figure)
-type triangleType = ((f: figure) => [figure, figure])
+// type squareType = ((f: figure) => figure)
+// type triangleType = ((f: figure) => [figure, figure])
 // type figureMaker = ((angle: number) => [triangleType, squareType])
 type figureDrawer = ((fig: figure) => void)
 type colorFunction = ((type: 'triangle' | 'square', number: number) => number)
-type figureMaker = ((angle: number, ins: Graphics, getColor: colorFunction) => [triangleType, squareType])
+// type figureMaker = ((angle: number, ins: Graphics, getColor: colorFunction, depth: number))
 
-export const makeFigures: figureMaker = (angle:number, ins: Graphics, getColor: colorFunction) => {
-    const triangle: triangleType = (f: figure): [figure, figure] => {
+export const makeFigures = (angle:number, ins: Graphics, getColor: colorFunction) => {
+    const triangle = (f: figure, depth: number) => {
+        if (!depth) return
         const p = f.points
         let size = Math.pow(p[0].x - p[1].x, 2) + Math.pow(p[0].y - p[1].y, 2)
         const ldv = Math.sqrt( size / (Math.pow(p[1].x - p[2].x, 2) + Math.pow(p[1].y - p[2].y, 2 )))
@@ -95,8 +96,11 @@ export const makeFigures: figureMaker = (angle:number, ins: Graphics, getColor: 
         ins.lineTo(sp4.x, sp4.y)
         ins.lineTo(p[1].x, p[1].y)
         ins.lineTo(p[0].x, p[0].y)
+        // ins.drawPolygon(sp3.x, sp3.y, sp4.x, sp4.y, p[1].x, p[1].y, p[0].x, p[0].y)
         ins.endFill()
         let fl: figure = {points:[sp3, sp4, p[1], p[0]], number:  f.number * 2};
+        if (depth - 1 > 0)
+            square(fl, depth - 1)
 
         size = Math.pow(p[1].x - p[2].x, 2) + Math.pow(p[1].y - p[2].y, 2)
         const rdv = Math.sqrt( size /  (Math.pow(p[1].x - p[0].x, 2) + Math.pow(p[1].y - p[0].y, 2 )))
@@ -109,9 +113,13 @@ export const makeFigures: figureMaker = (angle:number, ins: Graphics, getColor: 
         ins.lineTo(p[1].x, p[1].y)
         ins.endFill()
         const fr = {points: [sp4, sp3, p[2], p[1]], number: f.number * 2 + 1};
-        return [fl, fr]
+        // return [fl, fr]
+        if (depth - 1 > 0)
+            square(fr, depth - 1)
+
     }
-    const square: squareType = (f: figure): figure => {
+    const square = (f: figure, depth: number): void => {
+        if (!depth) return
         const p = f.points
         // const o = p[0].add(p[1].sub(p[0]).mul(0.5))
         const o = {x: (p[0].x + p[1].x)/2, y: (p[0].y + p[1].y)/2}
@@ -122,8 +130,9 @@ export const makeFigures: figureMaker = (angle:number, ins: Graphics, getColor: 
         ins.lineTo(tp3.x, tp3.y)
         ins.lineTo(p[1].x, p[1].y)
         ins.endFill()
-        return {points: [p[0], tp3, p[1]], 
-                number: f.number}
+        triangle({points: [p[0], tp3, p[1]], number: f.number}, depth)
+        // return {points: [p[0], tp3, p[1]], 
+        //         number: f.number}
     }
     return [triangle, square]
 }
