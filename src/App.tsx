@@ -11,10 +11,13 @@ const defaultSettings: CanvasProps = {
 		angle: Math.PI / 4, 
 		depth: 3, 
 		rootSize: 100,
-		colorFunction: 1
+		colorFunction: 1,
+		branchLong: 1
 	},
 	renderProps: {
-		viewport: 1
+		viewport: 1,
+		drawSquares: 1,
+		drawTriangles: 1,
 	}
 }
 

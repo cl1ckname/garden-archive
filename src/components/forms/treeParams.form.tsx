@@ -23,6 +23,18 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                                       value={true}
                                       onChange={(event,value) => props.renderChangeHandler(event, value ? 1 : 0, 'viewport')}/>
                 </Grid>
+                <Grid item xs={4}>
+                    <FormControlLabel control={<Checkbox defaultChecked  color="default"/>} 
+                                      label="Draw squares"
+                                      value={true}
+                                      onChange={(event,value) => props.renderChangeHandler(event, value ? 1 : 0, 'drawSquares')}/>
+                </Grid>
+                <Grid item xs={4}>
+                    <FormControlLabel control={<Checkbox defaultChecked  color="default"/>} 
+                                      label="Draw triangles"
+                                      value={true}
+                                      onChange={(event,value) => props.renderChangeHandler(event, value ? 1 : 0, 'drawTriangles')}/>
+                </Grid>
             </Grid>
             <List>
                 <ListItem>
@@ -43,6 +55,14 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                         max={Math.PI / 2 - 0.0001}
                         value={props.drawProps.angle}
                         onChange={(event, value) => props.drawChangeHandler(event, value as number, 'angle')} />
+                </ListItem>
+                <ListItem>
+                    <ListItemText> Branch long </ListItemText>
+                    <Slider step={0.001}
+                        min={1}
+                        max={4}
+                        value={props.drawProps.branchLong}
+                        onChange={(event, value) => props.drawChangeHandler(event, value as number, 'branchLong')} />
                 </ListItem>
                 <ListItem>
                     <ListItemText> Root size </ListItemText>

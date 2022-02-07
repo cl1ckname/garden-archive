@@ -5,6 +5,8 @@ import Viewport from "./viewport.component";
 
 export interface RenderParams {
 	viewport: number
+	drawSquares: number
+	drawTriangles: number
 }
 export interface DrawParams {
 	x: number
@@ -13,6 +15,7 @@ export interface DrawParams {
 	depth: number
 	angle: number
 	colorFunction: number
+	branchLong: number
 }
 export interface CanvasProps {
 	treeParams: DrawParams
