@@ -1,4 +1,4 @@
-import { Container, Stage } from "@inlet/react-pixi";
+import { Stage } from "@inlet/react-pixi";
 import React from "react";
 import { Tree } from "./geometric/tree.component"
 import Viewport from "./viewport.component";
