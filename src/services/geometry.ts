@@ -64,6 +64,61 @@ export interface Figure {
     // }
 }
 
+export type figure = {
+    points: Point[]
+    number: number
+}
+type squareType = ((f: figure) => figure)
+type triangleType = ((f: figure) => [figure, figure])
+
+export const makeFigures: ((angle: number) => [triangleType, squareType]) = (angle:number) => {
+    const triangle: triangleType = (f: figure): [figure, figure] => {
+        const p = f.points
+        const size = p[0].sub(p[1]).len()
+        let leftDerectVec = p[1].sub(p[2]).norm().mul(size)
+        let sp4 = p[1].add(leftDerectVec)
+        let sp3 = p[0].add(leftDerectVec)
+        let fl: figure = {points:[sp3, sp4, p[1], p[0]], number:  f.number * 2};
+    
+        const rightDerectVec = p[1].sub(p[0]).norm().mul(size)
+        sp4 = p[1].add(rightDerectVec)
+        sp3 = p[2].add(rightDerectVec)
+        const fr = {points: [sp4, sp3, p[2], p[1]], number: f.number * 2 + 1};
+        return [fl, fr]
+    }
+    const square: squareType = (f: figure): figure => {
+        const p = f.points
+        const o = p[0].add(p[1].sub(p[0]).mul(0.5))
+        const rotateAngle = 2 * angle
+        const tp3 = o.rotate(p[0], rotateAngle)
+        return {points: [p[0], tp3, p[1]], 
+                number: f.number}
+    }
+    return [triangle, square]
+}
+
+export const squareThroughtCoordinates = (x: number, y: number, size: number, number: number): figure => {
+    const p1 = new Point(x - size / 2, y - size / 2)
+    const p2 = new Point(x + size / 2, y - size / 2)
+    const p3 = new Point(x + size / 2, y + size / 2)
+    const p4 = new Point(x - size / 2, y + size / 2)
+    return {points: [p1, p2, p3, p4], number: number}
+}
+
+export const makeDrawer = (ins: Graphics, getColor: ColorFunction) => {
+    return (fig: figure) => {
+        ins.beginFill(getColor(fig))
+        ins.moveTo(fig.points[0].x, fig.points[0].y)
+        for (const p of fig.points) {
+            ins.lineTo(p.x, p.y)
+        }
+        ins.endFill()
+    }
+}
+
+
+
+
 export class Square implements Figure {
     points: Point[]
     number: number
@@ -154,9 +209,9 @@ export class Triangle implements Figure {
         const p2 = this.points[1]
         const p3 = this.points[0]
         const size = p1.sub(p2).len()
-        const leftDerectVec = p2.sub(p3).norm().mul(size)
-        const sp4 = p2.add(leftDerectVec)
-        const sp3 = p1.add(leftDerectVec)
+        const rightDerectVec = p2.sub(p3).norm().mul(size)
+        const sp4 = p2.add(rightDerectVec)
+        const sp3 = p1.add(rightDerectVec)
         return new Square(sp4, sp3, p1, p2, this.depth, this.number * 2 + 1);
     }
 }
