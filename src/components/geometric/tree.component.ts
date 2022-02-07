@@ -1,7 +1,7 @@
 import { PixiComponent } from "@inlet/react-pixi"
 import { Graphics } from "pixi.js"
 import { ColorCollection } from "../../services/colorFunctionCollection"
-import { makeDrawer, figure, makeFigures, Square, squareThroughtCoordinates, Triangle } from "../../services/geometry"
+import { figure, makeFigures, squareThroughtCoordinates } from "../../services/geometry"
 import { DrawParams, RenderParams } from "../canvas.component"
 
 
@@ -52,12 +52,12 @@ export const Tree = PixiComponent<TreeProps, Graphics>('Tree', {
     applyProps: (ins, _, props) => {
         const t1 = performance.now()
         const { x, y, depth, angle, rootSize, colorFunction } = props.drawParams
-        const [triangle, square] = makeFigures(angle)
         const { viewport } = props.renderParams
         const getColor =  ColorCollection[colorFunction].func
-
+        
         ins.clear()
-        const drawFigure = makeDrawer(ins, getColor)
+        // const drawFigure = makeDrawer(ins, getColor)
+        const [triangle, square] = makeFigures(angle, ins, getColor)
 
         const leafs: figure[] = [squareThroughtCoordinates(x, y, rootSize, 1)]
         const nodes: figure[] = []
@@ -65,12 +65,10 @@ export const Tree = PixiComponent<TreeProps, Graphics>('Tree', {
         for (let i = 0; i < depth; i++) {
             leafs.map(leaf => {
                 nodes.push(square(leaf))
-                drawFigure(leaf)
             })
             leafs.length = 0
             nodes.map(node => {
                 leafs.push(...triangle(node))
-                drawFigure(node)
             })
             nodes.length = 0
 

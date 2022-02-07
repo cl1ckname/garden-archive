@@ -1,7 +1,7 @@
 import { rgb2hex } from "@pixi/utils";
 import { figure, Figure } from "./geometry";
 
-export type ColorFunction = (figure: Figure | figure) => number
+export type ColorFunction = (type: 'square' | 'triangle', number: number) => number
 
 export interface ColorCollectionElement {
     id: number
@@ -13,17 +13,17 @@ export interface ColorCollectionElement {
 // 	return 0x009900;
 // }
 
-export const standart = (figure: Figure | figure) => {
-    if (figure.points.length === 4)
+export const standart = (type: 'square' | 'triangle', number: number) => {
+    if (type == 'square')
         return 0x99ffdd
     return 0x5599ff
 }
 
-export const violetGrow = (figure: Figure | figure) => {
-    if (figure.points.length === 4) {
-        return 0x552266 + 0x020000 * figure.number + 0x000011 * figure.number
+export const violetGrow = (type: 'square' | 'triangle', number: number) => {
+    if (type == 'square') {
+        return 0x552266 + 0x020000 * number + 0x000011 * number
     }
-    return 0x331133 + 0x001000 * figure.number + 0x000010 * figure.number
+    return 0x331133 + 0x001000 * number + 0x000010 * number
 }
 
 // export const whiteBlack = (figure: Figure) => {
