@@ -1,4 +1,4 @@
-import { rgb2hex } from "@pixi/utils";
+import { hex2rgb, rgb2hex } from "@pixi/utils";
 
 export type ColorFunction = (type: 'square' | 'triangle', number: number, depth: number) => number
 
@@ -40,11 +40,17 @@ export const Gradient = (type: 'square' | 'triangle', number: number, depth: num
     return rgb2hex([value, value, value])
 }
 
+export const Flare = (type: 'square' | 'triangle', number: number, depth: number) => {
+    const stage = Math.floor(Math.log2(number)) / depth
+    return rgb2hex([(0xf1 * (1 - stage) + 0xf5 * stage) / 255, (0x27* (1 - stage) + 0xaf * stage) / 255 , (0x11 * (1 - stage ) + 0x19 * stage) / 255 ])
+}
+
 export const ColorCollection: ColorCollectionElement[] =  [
     {id: 0, func: violetGrow, name: 'VioletGrow'},
     {id: 1, func: standart, name: 'Standart'},
     {id: 2, func: green, name: 'Green'},
     {id: 3, func: whiteBlack, name: 'Black-White'},
     {id: 4, func: Gradient, name: 'Gradient'},
+    {id: 5, func: Flare, name: 'Flare'},
     
 ]
