@@ -30,7 +30,7 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                     <Slider
                         step={1}
                         min={1}
-                        max={!!props.renderParams.viewport ? 16 : 20}
+                        max={!!props.renderParams.viewport ? 18 : 20}
                         marks
                         valueLabelDisplay="auto"
                         value={props.drawProps.depth}

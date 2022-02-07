@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import './App.css';
 import { MyForm } from './components/forms/treeParams.form';
 import { TreeCanvas, CanvasProps, DrawParams, RenderParams } from './components/canvas.component'
+import Store from "store"
 
 const defaultSettings: CanvasProps = { 
 	treeParams: {
@@ -18,14 +19,16 @@ const defaultSettings: CanvasProps = {
 }
 
 function App() {
-	const [drawProps, setTreeProps] = useState<DrawParams>(defaultSettings.treeParams)
-	const [renderProps, setRenderProps] = useState<RenderParams>(defaultSettings.renderProps)
+	const settings = Store.get('treeSettings', defaultSettings)
+	const [drawProps, setTreeProps] = useState<DrawParams>(settings.treeParams)
+	const [renderProps, setRenderProps] = useState<RenderParams>(settings.renderProps)
 
 	const changeTreeHandler = (event: ChangeEvent<{}>, value: number, key: keyof DrawParams) => {
 		event.preventDefault()
 		const propsCopy = Object.assign({}, drawProps)
 		propsCopy[key] = value	
 		setTreeProps(propsCopy)
+		Store.set('treeSettings', {treeParams: drawProps, renderProps: renderProps})
 	}
 
 	const changeRenderHandler = (event: ChangeEvent<{}>, value: number, key: keyof RenderParams) => {
@@ -33,6 +36,7 @@ function App() {
 		const propsCopy = Object.assign({}, renderProps)
 		propsCopy[key] = value
 		setRenderProps(propsCopy)
+		Store.set('treeSettings', {treeParams: drawProps, renderProps: renderProps})
 	}
 
 	return (

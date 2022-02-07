@@ -24,6 +24,6 @@ export const Tree = PixiComponent<TreeProps, Graphics>('Tree', {
         square(squareThroughtCoordinates(x, y, rootSize, 1, ins, getColor, depth), depth)
 
         const t2 = performance.now()
-        // console.log(t2-t1)
+        console.log(t2-t1)
     }
 })

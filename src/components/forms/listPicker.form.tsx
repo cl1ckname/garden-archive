@@ -53,14 +53,14 @@ export const ListPicker: React.FC<ListPickerProps> = (props: ListPickerProps) =>
                 <Typography>Color:    {props.colorList[props.colorFunction].name}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <List style={{ width: '100%' }}>
-                    <RadioGroup
-                        value={props.colorFunction}
-                        name="controlled-radio-buttons-group"
-                        onChange={props.onChangeHandle}
-                    >
-                        {listItems}
-                    </RadioGroup>
+                <List style={{ width: '100%', position: 'relative', overflow: 'auto', maxHeight: '20em' }}>
+                        <RadioGroup
+                            value={props.colorFunction}
+                            name="controlled-radio-buttons-group"
+                            onChange={props.onChangeHandle}
+                        >
+                            {listItems}
+                        </RadioGroup>
                 </List>
             </AccordionDetails>
         </Accordion>

@@ -29,7 +29,9 @@ export const cardStyle: CSS.Properties = {
     // marginTop: '1em',
     // marginRight: '5vw',
     top: '1em',
-    left: '1.5em'
+    left: '1.5em',
+    // overflow: 'auto'
+    
 }
 
 export const labelParagraph: CSS.Properties = {
