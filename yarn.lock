@@ -2927,6 +2927,11 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
+bit-buffer-ts@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/bit-buffer-ts/-/bit-buffer-ts-0.8.1.tgz#7db9c68cc1ab021d8ff07472aaa3c5c20f6980b7"
+  integrity sha512-VHi2n4d59wz9t2F3bYMzQzhOkoxS/tR1755bkTOI2B7342UAPM4jYDSSoJ3Dj5kY9JWcD9mWq18pJJfzN0I0BA==
+
 bluebird@^3.5.5:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
