@@ -79,5 +79,6 @@ export const ColorCollection: ColorCollectionElement[] =  [
     {id: 7, func: generateGradient(0x74ebd5, 0xACB6E5), name: 'Digital Water'},
     {id: 8, func: generateGradient(0x155799, 0x159957), name: 'Crystal Clear'},
     {id: 9, func: generateTypeGradient(0x200122, 0x6f0000, 0x2C3E50, 0xFD746C), name: 'Love, liberty and dusk'},
+    {id: 10, func: generateTypeGradient(0x283c86, 0x45a247, 0x000000, 0x0f9b0f), name: 'Terminal Meredian'},
     
 ]

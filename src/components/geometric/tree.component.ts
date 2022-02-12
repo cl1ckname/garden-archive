@@ -1,7 +1,7 @@
 import { PixiComponent } from "@inlet/react-pixi"
 import { Graphics } from "pixi.js"
 import { ColorCollection } from "../../services/colorFunctionCollection"
-import { makeFigures, squareThroughtCoordinates } from "../../services/geometry"
+import { makeFigures, squareThroughtCoordinates } from "../../services/treeGeometry"
 import { DrawParams, RenderParams } from "../canvas.component"
 
 
@@ -15,12 +15,10 @@ export const Tree = PixiComponent<TreeProps, Graphics>('Tree', {
     applyProps: (ins, _, props) => {
         const t1 = performance.now()
         const { x, y, depth, angle, rootSize, colorFunction, branchLong } = props.drawParams
-        const { viewport } = props.renderParams
         const getColor =  ColorCollection[colorFunction].func
 
         ins.clear()
-        // const drawFigure = makeDrawer(ins, getColor)
-        const [triangle, square] = makeFigures(angle, ins, getColor, branchLong, props.renderParams)
+        const [, square] = makeFigures(angle, ins, getColor, branchLong, props.renderParams)
         square(squareThroughtCoordinates(x, y, rootSize, 1, ins, getColor, depth, branchLong), depth)
 
         const t2 = performance.now()
