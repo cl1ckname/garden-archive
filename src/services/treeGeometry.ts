@@ -16,9 +16,11 @@ export type figure = {
     depth: number
 }
 
-export const makeFigures = (angle:number, ins: Graphics, getColor: ColorFunction, branchLong: number, renderParams: TreeRenderParams) => {
-    const triangle = (f: figure, depth: number) => {
-        if (!depth) return
+type squareType = ((f: figure) => figure)
+type triangleType = ((f: figure) => [figure, figure])
+
+export const makeFigures = (angle:number, ins: Graphics, getColor: ColorFunction, branchLong: number, renderParams: TreeRenderParams): [triangleType, squareType] => {
+    const triangle: triangleType = (f: figure) => {
         const p = f.points
         let size = Math.pow(p[0].x - p[1].x, 2) + Math.pow(p[0].y - p[1].y, 2)
         const ldv = Math.sqrt( size / (Math.pow(p[1].x - p[2].x, 2) + Math.pow(p[1].y - p[2].y, 2 ))) * branchLong
@@ -35,8 +37,7 @@ export const makeFigures = (angle:number, ins: Graphics, getColor: ColorFunction
         }
 
         let fl: figure = {points:[sp3, sp4, p[1], p[0]], number:  f.number * 2, depth: f.depth};
-        if (depth - 1 > 0)
-            square(fl, depth - 1)
+        
 
         size = Math.pow(p[1].x - p[2].x, 2) + Math.pow(p[1].y - p[2].y, 2)
         const rdv = Math.sqrt( size /  (Math.pow(p[1].x - p[0].x, 2) + Math.pow(p[1].y - p[0].y, 2 ))) * branchLong
@@ -53,12 +54,10 @@ export const makeFigures = (angle:number, ins: Graphics, getColor: ColorFunction
         }
 
         const fr = {points: [sp4, sp3, p[2], p[1]], number: f.number * 2 + 1, depth: f.depth};
-        if (depth - 1 > 0)
-            square(fr, depth - 1)
+        return [fr, fl]
 
     }
-    const square = (f: figure, depth: number): void => {
-        if (!depth) return
+    const square: squareType = (f: figure): figure => {
         const p = f.points
         const o = {x: (p[0].x + p[1].x)/2, y: (p[0].y + p[1].y)/2}
         const rotateAngle = 2 * angle
@@ -70,7 +69,8 @@ export const makeFigures = (angle:number, ins: Graphics, getColor: ColorFunction
             ins.lineTo(p[1].x, p[1].y)
             ins.endFill()
         }
-        triangle({points: [p[0], tp3, p[1]], number: f.number, depth: f.depth}, depth)
+        // triangle({points: [p[0], tp3, p[1]], number: f.number, depth: f.depth}, depth)
+        return {points: [p[0], tp3, p[1]], number: f.number, depth: f.depth}
     }
     return [triangle, square]
 }
