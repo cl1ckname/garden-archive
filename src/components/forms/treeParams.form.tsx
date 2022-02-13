@@ -57,7 +57,7 @@ export const TreeParams: React.FC<TreeFormProps> = (props: TreeFormProps) => {
                 <ListItem>
                     <ListItemText> Branch long </ListItemText>
                     <Slider step={0.001}
-                        min={1}
+                        min={0}
                         max={4}
                         value={props.drawProps.branchLong}
                         onChange={(event, value) => props.drawChangeHandler(event, value as number, 'branchLong')} />
