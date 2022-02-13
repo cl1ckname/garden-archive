@@ -2,12 +2,12 @@ import { PixiComponent } from "@inlet/react-pixi"
 import { Graphics } from "pixi.js"
 import { ColorCollection } from "../../services/colorFunctionCollection"
 import { makeFigures, squareThroughtCoordinates } from "../../services/treeGeometry"
-import { DrawParams, RenderParams } from "../canvas.component"
+import { TreeDrawParams, TreeRenderParams } from "../treeCanvas.component"
 
 
 export interface TreeProps {
-    drawParams: DrawParams
-    renderParams: RenderParams
+    drawParams: TreeDrawParams
+    renderParams: TreeRenderParams
 }
 
 export const Tree = PixiComponent<TreeProps, Graphics>('Tree', {

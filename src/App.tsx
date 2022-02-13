@@ -1,15 +1,19 @@
 import { ChangeEvent, useState } from 'react';
 import './App.css';
-import { MyForm } from './components/forms/treeParams.form';
-import { TreeCanvas, CanvasProps, DrawParams, RenderParams } from './components/canvas.component'
+import { TreeCanvas, TreeCanvasProps, TreeDrawParams, TreeRenderParams } from './components/treeCanvas.component'
 import Store from "store"
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { TreePage } from './components/treePage.component';
+import { DragonPage, DragonPageProps } from './components/dragonPage.component';
+import { DragonCanvasProps, DragonDrawParams } from './components/dragonCanvas.component';
 
-const defaultSettings: CanvasProps = { 
+
+const defaultTreeSettings: TreeCanvasProps = {
 	treeParams: {
 		x: window.innerWidth / 2,
 		y: window.innerHeight * 2 / 3,
-		angle: Math.PI / 4, 
-		depth: 3, 
+		angle: Math.PI / 4,
+		depth: 3,
 		rootSize: 100,
 		colorFunction: 1,
 		branchLong: 1
@@ -21,38 +25,62 @@ const defaultSettings: CanvasProps = {
 	}
 }
 
-function App() {
-	const settings = Store.get('treeSettings', defaultSettings)
-	const [drawProps, setTreeProps] = useState<DrawParams>(settings.treeParams)
-	const [renderProps, setRenderProps] = useState<RenderParams>(settings.renderProps)
-
-	const changeTreeHandler = (event: ChangeEvent<{}>, value: number, key: keyof DrawParams) => {
-		event.preventDefault()
-		const propsCopy = Object.assign({}, drawProps)
-		propsCopy[key] = value	
-		setTreeProps(propsCopy)
-		Store.set('treeSettings', {treeParams: drawProps, renderProps: renderProps})
+const defaultDragonSettings: DragonCanvasProps = {
+	dragonParams: {
+		depth: 3,
+		angle: Math.PI / 4,
+		width: 1,
+		colorFunction: 1
 	}
-
-	const changeRenderHandler = (event: ChangeEvent<{}>, value: number, key: keyof RenderParams) => {
-		event.preventDefault()
-		const propsCopy = Object.assign({}, renderProps)
-		propsCopy[key] = value
-		setRenderProps(propsCopy)
-		Store.set('treeSettings', {treeParams: drawProps, renderProps: renderProps})
-	}
-
-	return (
-		<div className="App">
-			<MyForm
-				drawProps={drawProps}
-				renderParams={renderProps}
-				drawChangeHandler={(event, value, type) => changeTreeHandler(event, value as number, type)}
-				renderChangeHandler={(event, value, type) => changeRenderHandler(event, value as number, type)}
-			/>
-			<TreeCanvas treeParams={drawProps} renderProps={renderProps}/>
-		</div>
-	);
 }
 
+function App() {
+	const treeSettings = Store.get('treeSettings', defaultTreeSettings)
+	const dragonSettings = Store.get('dragonSettings', defaultDragonSettings)
+
+	const [treeDrawProps, setTreeProps] = useState<TreeDrawParams>(treeSettings.treeParams)
+	const [renderTreeProps, setTreeRenderProps] = useState<TreeRenderParams>(treeSettings.renderProps)
+	const [dragonDrawProps, setDragonDrawProps] = useState<DragonDrawParams>(dragonSettings.dragonParams)
+
+	const changeTreeHandler = (event: ChangeEvent<{}>, value: number, key: keyof TreeDrawParams) => {
+		event.preventDefault()
+		const propsCopy = Object.assign({}, treeDrawProps)
+		propsCopy[key] = value
+		setTreeProps(propsCopy)
+		Store.set('treeSettings', { treeParams: treeDrawProps, renderProps: renderTreeProps })
+	}
+
+	const changeRenderHandler = (event: ChangeEvent<{}>, value: number, key: keyof TreeRenderParams) => {
+		event.preventDefault()
+		const propsCopy = Object.assign({}, renderTreeProps)
+		propsCopy[key] = value
+		setTreeRenderProps(propsCopy)
+		Store.set('treeSettings', { treeParams: treeDrawProps, renderProps: renderTreeProps })
+	}
+
+	const changeDragonHandler = (event: ChangeEvent<{}>, value: number, key: keyof DragonDrawParams) => {
+		event.preventDefault()
+		const propsCopy = Object.assign({}, dragonDrawProps)
+		propsCopy[key] = value
+		setDragonDrawProps(propsCopy)
+		Store.set('dragonSettings', { dragonParams: dragonDrawProps })
+	}
+
+
+
+	return <div className="App">
+		<BrowserRouter>
+			<Routes>
+				<Route path='/' element={
+					<TreePage drawProps={treeDrawProps} renderParams={renderTreeProps} 
+								changeRenderHandler={changeRenderHandler}
+								changeTreeHandler={changeTreeHandler}/>} />
+				
+				<Route path='/dragon' element={
+					<DragonPage dragonCanvasProps={dragonDrawProps} changeDragonHandler={changeDragonHandler}/>
+				} />
+			</Routes>
+		</BrowserRouter>
+	</div>
+}
 export default App;

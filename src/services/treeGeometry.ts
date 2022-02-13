@@ -1,5 +1,5 @@
 import { Graphics } from "pixi.js"
-import { RenderParams } from "../components/canvas.component"
+import { TreeRenderParams } from "../components/treeCanvas.component"
 import { ColorFunction } from "./colorFunctionCollection"
 
 const rotate = (o: {x: number,y: number}, p: {x: number, y:number}, angle: number) => {
@@ -16,7 +16,7 @@ export type figure = {
     depth: number
 }
 
-export const makeFigures = (angle:number, ins: Graphics, getColor: ColorFunction, branchLong: number, renderParams: RenderParams) => {
+export const makeFigures = (angle:number, ins: Graphics, getColor: ColorFunction, branchLong: number, renderParams: TreeRenderParams) => {
     const triangle = (f: figure, depth: number) => {
         if (!depth) return
         const p = f.points

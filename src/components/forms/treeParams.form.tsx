@@ -1,27 +1,19 @@
-import { Card, List, ListItemText, ListItem, Slider, Grid, Checkbox, FormControlLabel, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core"
-import { ExpandMore } from "@material-ui/icons"
-import { ChangeEvent, SetStateAction } from "react"
+import { List, ListItemText, ListItem, Slider, Grid, Checkbox, FormControlLabel } from "@material-ui/core"
+import { ChangeEvent } from "react"
 import { ColorCollection } from "../../services/colorFunctionCollection"
-import { cardStyle } from "../../styles/buildParams.style"
-import { DrawParams, RenderParams } from "../canvas.component"
+import { TreeDrawParams, TreeRenderParams } from "../treeCanvas.component"
 import { ListPicker } from "./listPicker.form"
 
 
 
-export interface FormProps {
-    drawProps: DrawParams
-    renderParams: RenderParams
-    drawChangeHandler: (event: ChangeEvent<{}>, value: number, type: keyof DrawParams) => void
-    renderChangeHandler: (event: ChangeEvent<{}>, value: number, type: keyof RenderParams) => void
+export interface TreeFormProps {
+    drawProps: TreeDrawParams
+    renderParams: TreeRenderParams
+    drawChangeHandler: (event: ChangeEvent<{}>, value: number, type: keyof TreeDrawParams) => void
+    renderChangeHandler: (event: ChangeEvent<{}>, value: number, type: keyof TreeRenderParams) => void
 }
-export const MyForm: React.FC<FormProps> = (props: FormProps) => {
+export const TreeParams: React.FC<TreeFormProps> = (props: TreeFormProps) => {
     return <div>
-        <Card style={cardStyle}>
-        <Accordion style={{backgroundColor: 'rgba(255, 255, 255, 0)'}}>
-            <AccordionSummary expandIcon={<ExpandMore />}>
-                Settings
-            </AccordionSummary>
-            <AccordionDetails style={{flexDirection: 'column'}}>
             <Grid container>
                 <Grid item xs={4}>
                     <FormControlLabel control={<Checkbox defaultChecked  color="default"/>} 
@@ -105,8 +97,5 @@ export const MyForm: React.FC<FormProps> = (props: FormProps) => {
                     </ListPicker>
                 </ListItem>
             </List>
-            </AccordionDetails>
-            </Accordion>
-        </Card>
     </div>
 }
