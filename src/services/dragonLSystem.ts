@@ -9,7 +9,7 @@ export const generateN = (steps: number) => {
     for (let i  = 1; i <= steps; i++) {
         bb.setBit(l,1)
         for (let j = 0; j < l; j++) {
-            bb.setBit(l*2 - j, (bb.getBit(j)) ? 0 : 1) // i * 2 - j + 1
+            bb.setBit(l*2 - j, (bb.getBit(j)) ? 0 : 1) // i * 2 - j + 1 
         }
         l = l * 2 + 1
     }

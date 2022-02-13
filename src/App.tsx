@@ -6,6 +6,9 @@ import { DragonPage, DragonPageProps } from './components/pages/dragonPage.compo
 import { DragonCanvasProps, DragonDrawParams } from './components/canvas/dragonCanvas.component';
 import { TreeCanvasProps, TreeDrawParams, TreeRenderParams } from './components/canvas/treeCanvas.component';
 import { TreePage } from './components/pages/treePage.component';
+import { BurgerMenu } from './components/burgerMenu.component';
+import { Card, Divider, List, ListItem, ListItemText } from '@material-ui/core';
+import { FractalMenu } from './components/fractalMenu.component';
 
 
 const defaultTreeSettings: TreeCanvasProps = {
@@ -80,6 +83,9 @@ function App() {
 					<DragonPage dragonCanvasProps={dragonDrawProps} changeDragonHandler={changeDragonHandler}/>
 				} />
 			</Routes>
+			<BurgerMenu>
+				<FractalMenu/>
+			</BurgerMenu>
 		</BrowserRouter>
 	</div>
 }
