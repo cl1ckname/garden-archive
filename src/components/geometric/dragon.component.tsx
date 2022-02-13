@@ -21,7 +21,7 @@ export const DragonCurve = PixiComponent<DragonProps, Graphics>('Dragon', {
         ins.clear()
         ins.moveTo(x,y)
         for (let i = l.bitLength; i > 0 ; i--) {
-            ins.lineStyle({color: getColor('square', i, Math.log2(l.bitLength)), width: width, alignment: 1})
+            ins.lineStyle({color: getColor('square', i, l.bitLength), width: width, alignment: 1})
             x = x + len * Math.cos(currentAngle);
             y = y + len * Math.sin(currentAngle);
             ins.lineTo(x,y);

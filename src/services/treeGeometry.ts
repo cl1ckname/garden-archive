@@ -26,7 +26,7 @@ export const makeFigures = (angle:number, ins: Graphics, getColor: ColorFunction
         let sp4 = {x: p[1].x + (p[1].x - p[2].x)*ldv, y: p[1].y + (p[1].y - p[2].y)*ldv}
 
         if (!!renderParams.drawSquares) {
-            ins.beginFill(getColor('square', f.number, f.depth))
+            ins.beginFill(getColor('square', Math.floor(Math.log2(f.number)), f.depth))
             ins.moveTo(sp3.x, sp3.y)
             ins.lineTo(sp4.x, sp4.y)
             ins.lineTo(p[1].x, p[1].y)
@@ -44,7 +44,7 @@ export const makeFigures = (angle:number, ins: Graphics, getColor: ColorFunction
         sp3 = {x: p[2].x + (p[1].x - p[0].x)*rdv, y: p[2].y + (p[1].y - p[0].y)*rdv}
 
         if (!!renderParams.drawSquares){
-            ins.beginFill(getColor('square', f.number, f.depth))
+            ins.beginFill(getColor('square', Math.floor(Math.log2(f.number)), f.depth))
             ins.moveTo(sp4.x, sp4.y)
             ins.lineTo(sp3.x, sp3.y)
             ins.lineTo(p[2].x, p[2].y)
@@ -64,7 +64,7 @@ export const makeFigures = (angle:number, ins: Graphics, getColor: ColorFunction
         const rotateAngle = 2 * angle
         const tp3 = rotate(o, p[0], rotateAngle)
         if (renderParams.drawTriangles){
-            ins.beginFill(getColor('triangle', f.number, f.depth))
+            ins.beginFill(getColor('triangle', Math.floor(Math.log2(f.number)), f.depth))
             ins.moveTo(p[0].x, p[0].y)
             ins.lineTo(tp3.x, tp3.y)
             ins.lineTo(p[1].x, p[1].y)
@@ -87,7 +87,7 @@ export const squareThroughtCoordinates = (x: number,
     const p2 = {x: x + size / 2, y: y - size / 2 * branchLong}
     const p3 = {x: x + size / 2, y: y + size / 2 * branchLong}
     const p4 = {x: x - size / 2, y: y + size / 2 * branchLong}
-    ins.beginFill(getColor('square', number, depth))
+    ins.beginFill(getColor('square', Math.floor(Math.log2(number)), depth))
     ins.moveTo(p1.x, p1.y)
     ins.lineTo(p2.x, p2.y)
     ins.lineTo(p3.x, p3.y)

@@ -16,7 +16,7 @@ const generateGradient = (color1: number, color2: number) => {
     const g2 = Math.floor(color2 / 16**2) % 16**2
     const b2 = color2 % 16**2
     const gradFunction = (type: 'square' | 'triangle', number: number, depth: number) => {
-        const stage = Math.floor(Math.log2(number)) / depth
+        const stage = number / depth
         return rgb2hex([(r1 * (1 - stage) + r2 * stage) / 255, (g1* (1 - stage) + g2 * stage) / 255 , (b1 * (1 - stage ) + b2 * stage) / 255 ])
     }
     return gradFunction
@@ -57,14 +57,14 @@ export const whiteBlack = (type: 'square' | 'triangle', number: number, depth: n
 
 export const Gradient = (type: 'square' | 'triangle', number: number, depth: number) => {
     const step = 1 / depth
-    var value = step * Math.floor(Math.log2(number))
+    var value = step * number
     if (type === 'triangle')
         value += step / 2
     return rgb2hex([value, value, value])
 }
 
 export const Flare = (type: 'square' | 'triangle', number: number, depth: number) => {
-    const stage = Math.floor(Math.log2(number)) / depth
+    const stage = number / depth
     return rgb2hex([(0xf1 * (1 - stage) + 0xf5 * stage) / 255, (0x27* (1 - stage) + 0xaf * stage) / 255 , (0x11 * (1 - stage ) + 0x19 * stage) / 255 ])
 }
 
