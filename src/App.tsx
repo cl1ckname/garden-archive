@@ -1,11 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import './App.css';
-import { TreeCanvas, TreeCanvasProps, TreeDrawParams, TreeRenderParams } from './components/treeCanvas.component'
 import Store from "store"
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { TreePage } from './components/treePage.component';
-import { DragonPage, DragonPageProps } from './components/dragonPage.component';
-import { DragonCanvasProps, DragonDrawParams } from './components/dragonCanvas.component';
+import { DragonPage, DragonPageProps } from './components/pages/dragonPage.component';
+import { DragonCanvasProps, DragonDrawParams } from './components/canvas/dragonCanvas.component';
+import { TreeCanvasProps, TreeDrawParams, TreeRenderParams } from './components/canvas/treeCanvas.component';
+import { TreePage } from './components/pages/treePage.component';
 
 
 const defaultTreeSettings: TreeCanvasProps = {

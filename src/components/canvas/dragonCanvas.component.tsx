@@ -1,7 +1,7 @@
 import { Stage } from "@inlet/react-pixi";
 import React from "react";
-import { DragonCurve } from "./geometric/dragon.component";
-import Viewport from "./viewport.component";
+import { DragonCurve } from "../geometric/dragon.component";
+import Viewport from "../viewport.component";
 
 
 export interface DragonDrawParams {

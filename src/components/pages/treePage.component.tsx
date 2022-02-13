@@ -1,8 +1,8 @@
 import { ChangeEvent } from 'react';
-import { TreeDrawParams, TreeRenderParams, TreeCanvas } from './treeCanvas.component';
-import { TreeParams } from './forms/treeParams.form';
-import { DragonCurve } from './geometric/dragon.component';
-import { Settings } from './settings.component';
+import { TreeCanvas, TreeDrawParams, TreeRenderParams } from '../canvas/treeCanvas.component';
+import { TreeParams } from '../forms/treeParams.form';
+import { Settings } from '../settings.component';
+
 
 
 interface TreePageProps{

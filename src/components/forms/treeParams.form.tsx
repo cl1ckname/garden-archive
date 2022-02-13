@@ -1,7 +1,7 @@
 import { List, ListItemText, ListItem, Slider, Grid, Checkbox, FormControlLabel } from "@material-ui/core"
 import { ChangeEvent } from "react"
 import { ColorCollection } from "../../services/colorFunctionCollection"
-import { TreeDrawParams, TreeRenderParams } from "../treeCanvas.component"
+import { TreeDrawParams, TreeRenderParams } from "../canvas/treeCanvas.component"
 import { ListPicker } from "./listPicker.form"
 
 

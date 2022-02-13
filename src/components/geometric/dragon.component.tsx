@@ -1,8 +1,8 @@
 import { PixiComponent } from "@inlet/react-pixi"
 import { Graphics } from "pixi.js"
-import { ColorCollection, Flare, Gradient } from "../../services/colorFunctionCollection"
+import { ColorCollection } from "../../services/colorFunctionCollection"
 import { generateN } from "../../services/dragonLSystem"
-import { DragonDrawParams } from "../dragonCanvas.component"
+import { DragonDrawParams } from "../canvas/dragonCanvas.component"
 
 export interface DragonProps {
     drawParams: DragonDrawParams

@@ -1,8 +1,7 @@
 import { List, ListItemText, ListItem, Slider } from "@material-ui/core"
 import { ChangeEvent } from "react"
 import { ColorCollection } from "../../services/colorFunctionCollection"
-import { DragonDrawParams } from "../dragonCanvas.component"
-import { TreeDrawParams, TreeRenderParams } from "../treeCanvas.component"
+import { DragonDrawParams } from "../canvas/dragonCanvas.component"
 import { ListPicker } from "./listPicker.form"
 
 

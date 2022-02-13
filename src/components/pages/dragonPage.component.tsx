@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react"
-import { DragonCanvas, DragonCanvasProps, DragonDrawParams } from "./dragonCanvas.component"
-import { DragonParams } from "./forms/dragonParams.form"
-import { Settings } from "./settings.component"
+import { DragonCanvas, DragonCanvasProps, DragonDrawParams } from "../canvas/dragonCanvas.component"
+import { DragonParams } from "../forms/dragonParams.form"
+import { Settings } from "../settings.component"
 
 export interface DragonPageProps {
     dragonCanvasProps: DragonDrawParams

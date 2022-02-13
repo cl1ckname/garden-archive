@@ -1,5 +1,5 @@
 import { Graphics } from "pixi.js"
-import { TreeRenderParams } from "../components/treeCanvas.component"
+import { TreeRenderParams } from "../components/canvas/treeCanvas.component"
 import { ColorFunction } from "./colorFunctionCollection"
 
 const rotate = (o: {x: number,y: number}, p: {x: number, y:number}, angle: number) => {
