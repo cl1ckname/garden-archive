@@ -18,20 +18,26 @@ export const TreeParams: React.FC<TreeFormProps> = (props: TreeFormProps) => {
                 <Grid item xs={4}>
                     <FormControlLabel control={<Checkbox defaultChecked  color="default"/>} 
                                       label="ViewPort"
-                                      value={true}
+                                      value={props.renderParams.viewport}
                                       onChange={(event,value) => props.renderChangeHandler(event, value ? 1 : 0, 'viewport')}/>
                 </Grid>
                 <Grid item xs={4}>
                     <FormControlLabel control={<Checkbox defaultChecked  color="default"/>} 
                                       label="Draw squares"
-                                      value={true}
+                                      value={props.renderParams.drawSquares}
                                       onChange={(event,value) => props.renderChangeHandler(event, value ? 1 : 0, 'drawSquares')}/>
                 </Grid>
                 <Grid item xs={4}>
                     <FormControlLabel control={<Checkbox defaultChecked  color="default"/>} 
                                       label="Draw triangles"
-                                      value={true}
+                                      value={props.renderParams.drawTriangles}
                                       onChange={(event,value) => props.renderChangeHandler(event, value ? 1 : 0, 'drawTriangles')}/>
+                </Grid>
+                <Grid item xs={4}>
+                    <FormControlLabel control={<Checkbox defaultChecked  color="default"/>} 
+                                      label="Fill figures"
+                                      value={props.renderParams.fill}
+                                      onChange={(event,value) => props.renderChangeHandler(event, value ? 1 : 0, 'fill')}/>
                 </Grid>
             </Grid>
             <List>
@@ -61,6 +67,15 @@ export const TreeParams: React.FC<TreeFormProps> = (props: TreeFormProps) => {
                         max={4}
                         value={props.drawProps.branchLong}
                         onChange={(event, value) => props.drawChangeHandler(event, value as number, 'branchLong')} />
+                </ListItem>
+                <ListItem>
+                    <ListItemText> Line Width </ListItemText>
+                    <Slider step={0.001}
+                        min={1}
+                        max={10}
+                        value={props.drawProps.lineWidth}
+                        disabled={!!props.renderParams.fill}
+                        onChange={(event, value) => props.drawChangeHandler(event, value as number, 'lineWidth')} />
                 </ListItem>
                 <ListItem>
                     <ListItemText> Root size </ListItemText>

@@ -7,6 +7,7 @@ export interface TreeRenderParams {
 	viewport: number
 	drawSquares: number
 	drawTriangles: number
+	fill: number
 }
 export interface TreeDrawParams {
 	x: number
@@ -15,7 +16,8 @@ export interface TreeDrawParams {
 	depth: number
 	angle: number
 	colorFunction: number
-	branchLong: number
+	branchLong: number,
+	lineWidth: number
 }
 export interface TreeCanvasProps {
 	treeParams: TreeDrawParams

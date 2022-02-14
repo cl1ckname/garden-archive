@@ -14,12 +14,12 @@ export const Tree = PixiComponent<TreeProps, Graphics>('Tree', {
     create: () => new Graphics(),
     applyProps: (ins, _, props) => {
         const t1 = performance.now()
-        const { x, y, depth, angle, rootSize, colorFunction, branchLong } = props.drawParams
+        const { x, y, depth, angle, rootSize, colorFunction, branchLong, lineWidth } = props.drawParams
         const getColor =  ColorCollection[colorFunction].func
 
         ins.clear()
-        const [triangle, square] = makeFigures(angle, ins, getColor, branchLong, props.renderParams)
-        let leafs: figure[] = [squareThroughtCoordinates(x, y, rootSize, 1, ins, getColor, depth, branchLong)]
+        const [triangle, square] = makeFigures(angle, ins, getColor, branchLong, lineWidth,props.renderParams)
+        let leafs: figure[] = [squareThroughtCoordinates(x, y, rootSize, 1, ins, getColor, depth, branchLong, !!props.renderParams.fill, lineWidth)]
         let nodes: figure[] = []
 
         for (let i = 0; i < depth; i++) {

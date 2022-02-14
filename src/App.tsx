@@ -19,12 +19,14 @@ const defaultTreeSettings: TreeCanvasProps = {
 		depth: 3,
 		rootSize: 100,
 		colorFunction: 1,
-		branchLong: 1
+		branchLong: 1,
+		lineWidth: 3
 	},
 	renderProps: {
 		viewport: 1,
 		drawSquares: 1,
 		drawTriangles: 1,
+		fill: 1,
 	}
 }
 
