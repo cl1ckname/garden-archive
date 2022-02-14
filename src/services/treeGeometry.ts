@@ -27,7 +27,7 @@ export const makeFigures = (angle:number,
                             renderParams: TreeRenderParams): [triangleType, squareType] => {
     const triangle: triangleType = (f: figure) => {
         const p = f.points
-        const color = getColor('square', Math.floor(Math.log2(f.number)), f.depth)
+        const color = getColor('primary', Math.floor(Math.log2(f.number)), f.depth)
 
         let size = Math.pow(p[0].x - p[1].x, 2) + Math.pow(p[0].y - p[1].y, 2)
         const ldv = Math.sqrt( size / (Math.pow(p[1].x - p[2].x, 2) + Math.pow(p[1].y - p[2].y, 2 ))) * branchLong
@@ -77,7 +77,7 @@ export const makeFigures = (angle:number,
         const o = {x: (p[0].x + p[1].x)/2, y: (p[0].y + p[1].y)/2}
         const rotateAngle = 2 * angle
         const tp3 = rotate(o, p[0], rotateAngle)
-        const color = getColor('triangle', Math.floor(Math.log2(f.number)), f.depth)
+        const color = getColor('secondary', Math.floor(Math.log2(f.number)), f.depth)
         if (renderParams.drawTriangles){
             if (renderParams.fill)
                 ins.beginFill(color)
@@ -109,7 +109,7 @@ export const squareThroughtCoordinates = (x: number,
     const p2 = {x: x + size / 2, y: y - size / 2 * branchLong}
     const p3 = {x: x + size / 2, y: y + size / 2 * branchLong}
     const p4 = {x: x - size / 2, y: y + size / 2 * branchLong}
-    const color = getColor('square', Math.floor(Math.log2(number)), depth)
+    const color = getColor('primary', Math.floor(Math.log2(number)), depth)
 
     if (fill)
         ins.beginFill(color)
