@@ -48,6 +48,13 @@ const listDivider: CSS.Properties = {
 export const FractalMenu: React.FC = () => {
     return <Card style={cardStyle}>
         <List style={listContainer}>
+            <Link to='/' style={undecoratedText}>
+                <ListItem style={listCard}>
+                    <ListItemText>
+                        <Typography style ={cardText} variant="h5"> PYPHAGORIOS TREE </Typography>
+                    </ListItemText>
+                </ListItem>
+            </Link>
             <ListItem style={listHeadder}>
                 <ListItemText style={{ fontWeight: 'bold', fontSize: '1.2em !importent' }}>
                     <Typography variant="h6">Fractals</Typography>
@@ -60,10 +67,10 @@ export const FractalMenu: React.FC = () => {
                     </ListItemText>
                 </ListItem>
             </Link>
-            <Link to='/' style={undecoratedText}>
+            <Link to='/attract' style={undecoratedText}>
                 <ListItem style={listCard}>
                     <ListItemText>
-                        <Typography style ={cardText} variant="h5"> PYPHAGORIOS TREE </Typography>
+                        <Typography style ={cardText} variant="h5"> ATTRACT </Typography>
                     </ListItemText>
                 </ListItem>
             </Link>

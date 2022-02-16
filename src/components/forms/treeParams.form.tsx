@@ -40,6 +40,7 @@ export const TreeParams: React.FC<TreeFormProps> = (props: TreeFormProps) => {
                                       onChange={(event,value) => props.renderChangeHandler(event, value ? 1 : 0, 'fill')}/>
                 </Grid>
             </Grid>
+            <iframe src="https://studentspburu.sharepoint.com/sites/12.5005.20/_layouts/15/Doc.aspx?sourcedoc={d1eab502-6259-4eb9-bab5-fd8588491e26}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="476px" height="288px" frameBorder="0">Это внедренный файл <a target="_blank" href="https://office.com">Microsoft Office</a> на платформе <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
             <List>
                 <ListItem>
                     <ListItemText> Iteration number </ListItemText>
@@ -112,5 +113,6 @@ export const TreeParams: React.FC<TreeFormProps> = (props: TreeFormProps) => {
                     </ListPicker>
                 </ListItem>
             </List>
+
     </div>
 }

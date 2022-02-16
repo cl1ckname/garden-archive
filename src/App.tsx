@@ -2,13 +2,13 @@ import { ChangeEvent, useState } from 'react';
 import './App.css';
 import Store from "store"
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { DragonPage, DragonPageProps } from './components/pages/dragonPage.component';
+import { DragonPage } from './components/pages/dragonPage.component';
 import { DragonCanvasProps, DragonDrawParams } from './components/canvas/dragonCanvas.component';
 import { TreeCanvasProps, TreeDrawParams, TreeRenderParams } from './components/canvas/treeCanvas.component';
 import { TreePage } from './components/pages/treePage.component';
-import { BurgerMenu } from './components/burgerMenu.component';
-import { Card, Divider, List, ListItem, ListItemText } from '@material-ui/core';
-import { FractalMenu } from './components/fractalMenu.component';
+import { BurgerMenu } from './components/menus/burgerMenu.component';
+import { AttractPage } from './components/pages/attractPage.component';
+import { FractalMenu } from './components/menus/fractalMenu.component';
 
 
 const defaultTreeSettings: TreeCanvasProps = {
@@ -83,6 +83,9 @@ function App() {
 				
 				<Route path='/dragon' element={
 					<DragonPage dragonCanvasProps={dragonDrawProps} changeDragonHandler={changeDragonHandler}/>
+				} />
+				<Route path='/attract' element={
+					<AttractPage/>
 				} />
 			</Routes>
 			<BurgerMenu>
