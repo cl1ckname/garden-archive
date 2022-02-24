@@ -37,14 +37,18 @@ export const AttractCanvas: React.FC<AttractCanvasProps> = (props: AttractCanvas
     };
     const onDragEnd = (event: PIXI.InteractionEvent, ind: number) => {
         const sprite = event.currentTarget as Draggable;
-        const propsCopy = Object.assign({}, props.attractDrawProps)
         const vp = sprite.parent as PixiViewport
+        const propsCopy = Object.assign({}, props.attractDrawProps)
+        const newPosition = sprite.data!.getLocalPosition(sprite.parent);
+
+        propsCopy.points[ind].x = newPosition.x
+        propsCopy.points[ind].y = newPosition.y
+
+        props.setAttractProps(propsCopy)
+
         sprite.alpha = 1;
         sprite.dragging = false;
         sprite.data = null;
-        propsCopy.points[ind].x = event.data.global.x
-        propsCopy.points[ind].y = event.data.global.y
-        props.setAttractProps(propsCopy)
         vp.drag()
     };
 
@@ -57,8 +61,8 @@ export const AttractCanvas: React.FC<AttractCanvasProps> = (props: AttractCanvas
         }
     };
     return <Stage options={{ backgroundAlpha: 0 }}
-        width={window.innerWidth * 1.5}
-        height={window.innerHeight * 1.5}>
+        width={window.innerWidth}
+        height={window.innerHeight}>
         <Viewport width={window.innerWidth} height={window.innerHeight}>
             {props.attractDrawProps.points.map((p, ind) => <Sprite image={circle}
                 x={p.x} y={p.y}
