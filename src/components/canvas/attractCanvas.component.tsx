@@ -13,6 +13,10 @@ interface Draggable extends PIXI.DisplayObject {
 
 export interface AttractDrawProps {
     points: {x: number, y: number}[]
+    iters: number,
+    colorFunction: number,
+    ratio: number,
+    points_number: number
 }
 
 export interface AttractCanvasProps {
