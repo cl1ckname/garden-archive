@@ -1,4 +1,4 @@
-import { Sprite, Stage } from "@inlet/react-pixi"
+import { AppConsumer, Sprite, Stage } from "@inlet/react-pixi"
 import { Viewport as PixiViewport } from "pixi-viewport"
 import * as PIXI from "pixi.js"
 import { Dispatch, SetStateAction } from "react"
@@ -16,7 +16,9 @@ export interface AttractDrawProps {
     iters: number,
     colorFunction: number,
     ratio: number,
-    points_number: number
+    points_number: number,
+    speed: number,
+    size: number
 }
 
 export interface AttractCanvasProps {
@@ -67,7 +69,9 @@ export const AttractCanvas: React.FC<AttractCanvasProps> = (props: AttractCanvas
                 pointerup={(event) => onDragEnd(event, ind)}
                 pointerupoutside={(event) => onDragEnd(event, ind)}
                 pointermove={(event) => onDragMove(event, ind)} />)}
-            <Attract drawParams={props.attractDrawProps}/>
+            <AppConsumer>
+                {(app) => <Attract drawParams={props.attractDrawProps} app={app}/>}
+            </AppConsumer>
         </Viewport>
     </Stage>
 }

@@ -7,16 +7,6 @@ import { generatePoints } from "../../services/attractGeneratePoints"
 
 const wh = window.innerHeight
 const ww = window.innerWidth
-// const defautAttractSettings: AttractDrawProps = {
-//     points: [{x: 500, y: 500}, 
-//              {x: 750, y: 500}, 
-//              {x: 1000, y: 500}, 
-//              {x: 500, y: 750}, 
-//              {x: 1000, y: 750}, 
-//              {x: 500, y: 1000}, 
-//              {x: 750, y: 1000}, 
-//              {x: 1000, y: 1000}]
-// }
 
 const defautAttractSettings: AttractDrawProps = {
         points: [{x: 0, y: 0}, 
@@ -30,7 +20,9 @@ const defautAttractSettings: AttractDrawProps = {
         iters: 100000,
         colorFunction: 5,
         ratio: 2/3,
-        points_number: 8
+        points_number: 8,
+        speed: 100,
+        size: 0.03
     }
 
 export const AttractPage: React.FC = () => {
@@ -49,7 +41,7 @@ export const AttractPage: React.FC = () => {
 	}
 
     return <>
-        <Settings> <AttractParams drawProps={attractSettings} drawChangeHandler={changeAttractHandler}/> </Settings>
+        <Settings> <AttractParams drawProps={attractProps} drawChangeHandler={changeAttractHandler}/> </Settings>
         <AttractCanvas attractDrawProps={attractProps} 
                        setAttractProps={setAttractProps}/>
             </>
