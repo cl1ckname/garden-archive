@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import './App.css';
 import Store from "store"
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import { DragonPage } from './components/pages/dragonPage.component';
 import { DragonCanvasProps, DragonDrawParams } from './components/canvas/dragonCanvas.component';
 import { TreeCanvasProps, TreeDrawParams, TreeRenderParams } from './components/canvas/treeCanvas.component';
@@ -74,7 +74,7 @@ function App() {
 
 
 	return <div className="App">
-		<BrowserRouter>
+		<HashRouter>
 			<Routes>
 				<Route path='/' element={
 					<TreePage drawProps={treeDrawProps} renderParams={renderTreeProps} 
@@ -91,7 +91,7 @@ function App() {
 			<BurgerMenu>
 				<FractalMenu/>
 			</BurgerMenu>
-		</BrowserRouter>
+		</HashRouter>
 	</div>
 }
 export default App;
