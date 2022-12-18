@@ -5,7 +5,7 @@ import { TreePage } from './components/pages/treePage.component';
 import { BurgerMenu } from './components/menus/burgerMenu.component';
 import { AttractPage } from './components/pages/attractPage.component';
 import { FractalMenu } from './components/menus/fractalMenu.component';
-import { NewPage } from './components/pages/newPage.component';
+import { PoolPage } from './components/pages/poolPage.component';
 
 function App() {
 	return <div className="App">
@@ -22,7 +22,7 @@ function App() {
 					<AttractPage/>
 				} />
 				<Route path='/new' element={
-					<NewPage/>
+					<PoolPage/>
 				} />
 			</Routes>
 			<BurgerMenu>
