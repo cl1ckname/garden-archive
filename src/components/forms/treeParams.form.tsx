@@ -20,7 +20,6 @@ export const TreeParams: React.FC = () => {
     const dispatch = useDispatch()
     const props = useSelector((state: RootState) => state.tree)
     useEffect(() => {
-        console.log('pupipupipupipupi')
 		Store.set('treeSettings', props )
 	}, [props])
 

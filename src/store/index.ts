@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { dragonReducer } from './dragonReducer'
 import { treeReducer } from './treeReducer'
 
 export const store = configureStore({
   reducer: {
-	tree: treeReducer
+	  tree: treeReducer,
+    dragon: dragonReducer,
   },
 })
 

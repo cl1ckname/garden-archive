@@ -1,16 +1,18 @@
 import { List, ListItemText, ListItem, Slider } from "@material-ui/core"
-import { ChangeEvent } from "react"
+import { useEffect } from "react"
 import { ColorCollection } from "../../services/colorFunctionCollection"
-import { DragonDrawParams } from "../canvas/dragonCanvas.component"
 import { ListPicker } from "./listPicker.form"
+import Store from "store"
+import { useSelector, useDispatch } from 'react-redux'
+import { dragonActions } from "../../store/dragonReducer"
+import { RootState } from "../../store"
 
-
-
-export interface DragonFormProps {
-    drawProps: DragonDrawParams
-    drawChangeHandler: (event: ChangeEvent<{}>, value: number, type: keyof DragonDrawParams) => void
-}
-export const DragonParams: React.FC<DragonFormProps> = (props: DragonFormProps) => {
+export const DragonParams: React.FC = () => {
+    const dispatch = useDispatch()
+    const props = useSelector((state: RootState) => state.dragon)
+    useEffect(() => {
+		Store.set('dragonSettings', props )
+	}, [props])
     return <div>
             <List>
                 <ListItem>
@@ -21,8 +23,8 @@ export const DragonParams: React.FC<DragonFormProps> = (props: DragonFormProps) 
                         max={20}
                         marks
                         valueLabelDisplay="auto"
-                        value={props.drawProps.depth}
-                        onChange={(event, value) => props.drawChangeHandler(event, value as number, 'depth')} />
+                        value={props.dragonParams.depth}
+                        onChange={(event, value) => dispatch(dragonActions.setDepth(value as number))} />
                 </ListItem>
                 <ListItem>
                     <ListItemText> Angle </ListItemText>
@@ -30,8 +32,8 @@ export const DragonParams: React.FC<DragonFormProps> = (props: DragonFormProps) 
                         min={-Math.PI / 2}
                         max={Math.PI / 2}
                         marks={[{value: 0, label: '0'}]}
-                        value={props.drawProps.angle}
-                        onChange={(event, value) => props.drawChangeHandler(event, value as number, 'angle')} />
+                        value={props.dragonParams.angle}
+                        onChange={(event, value) => dispatch(dragonActions.setAngle(value as number))} />
                 </ListItem>
                 <ListItem>
                     <ListItemText> Line width </ListItemText>
@@ -39,14 +41,14 @@ export const DragonParams: React.FC<DragonFormProps> = (props: DragonFormProps) 
                         min={1}
                         max={10}
                         marks
-                        value={props.drawProps.width}
-                        onChange={(event, value) => props.drawChangeHandler(event, value as number, 'width')} />
+                        value={props.dragonParams.width}
+                        onChange={(event, value) => dispatch(dragonActions.setWidth(value as number))} />
                 </ListItem>
                 <ListItem>
                     <ListPicker classes={{ listItemClicked: 'ActiveColor', listItemNotClicked: 'UnActiveColor' }}
                         colorList={ColorCollection}
-                        onChangeHandle={(event, value) => props.drawChangeHandler(event, Number.parseInt(value), 'colorFunction')}
-                        colorFunction={props.drawProps.colorFunction}>
+                        onChangeHandle={(event, value) => dispatch(dragonActions.setColorFunction(Number.parseInt(value)))}
+                        colorFunction={props.dragonParams.colorFunction}>
                     </ListPicker>
                 </ListItem>
             </List>
