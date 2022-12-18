@@ -23,11 +23,11 @@ export const Tree = PixiComponent<TreeProps, Graphics>('Tree', {
         let nodes: figure[] = []
 
         for (let i = 0; i < depth; i++) {
-            leafs.map(leaf => {
+            leafs.forEach(leaf => {
                 nodes.push(square(leaf))
             })
             leafs.length = 0
-            nodes.map(node => {
+            nodes.forEach(node => {
                 leafs.push(...triangle(node))
             })
             nodes.length = 0

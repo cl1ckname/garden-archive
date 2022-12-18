@@ -2,12 +2,14 @@ import { Stage } from "@inlet/react-pixi";
 import React from "react";
 import { Tree } from "../geometric/tree.component";
 import Viewport from "../viewport.component";
+import { useSelector } from 'react-redux'
+import { RootState } from "../../store";
 
 export interface TreeRenderParams {
-	viewport: number
-	drawSquares: number
-	drawTriangles: number
-	fill: number
+	viewport: boolean
+	drawSquares: boolean
+	drawTriangles: boolean
+	fill: boolean
 }
 export interface TreeDrawParams {
 	x: number
@@ -19,16 +21,18 @@ export interface TreeDrawParams {
 	branchLong: number,
 	lineWidth: number
 }
+
 export interface TreeCanvasProps {
-	treeParams: TreeDrawParams
+	drawProps: TreeDrawParams,
 	renderProps: TreeRenderParams
 }
 
 
-export const TreeCanvas: React.FC<TreeCanvasProps> = (props: TreeCanvasProps) => {
-	const canvas = (!!props.renderProps.viewport) ? <Viewport width={window.innerWidth} height={window.innerHeight}>
-														<Tree drawParams={props.treeParams} renderParams={props.renderProps} />
-													</Viewport> : <Tree drawParams={props.treeParams} renderParams={props.renderProps} />
+export const TreeCanvas: React.FC = () => {
+	const treeProps = useSelector((state: RootState) => state.tree)
+	const canvas = (!!treeProps.renderProps.viewport) ? <Viewport width={window.innerWidth} height={window.innerHeight}>
+														<Tree drawParams={treeProps.drawProps} renderParams={treeProps.renderProps} />
+													</Viewport> : <Tree drawParams={treeProps.drawProps} renderParams={treeProps.renderProps} />
 	return <Stage options={{ backgroundAlpha: 0 }}
 		width={window.innerWidth}
 		height={window.innerHeight}>
