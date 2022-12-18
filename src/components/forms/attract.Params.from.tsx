@@ -19,7 +19,7 @@ export const AttractParams: React.FC<AttractFormProps> = (props: AttractFormProp
                     <Slider
                         step={100}
                         min={1}
-                        max={100000}
+                        max={10000990}
                         valueLabelDisplay="auto"
                         value={props.drawProps.iters}
                         onChange={(event, value) => props.drawChangeHandler(event, value as number, 'iters')} />
