@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../store"
 import Store from "store"
-import { List, ListItem, Slider } from "@material-ui/core"
+import { Button, List, ListItem, Slider } from "@material-ui/core"
 import { ListItemText } from "@material-ui/core"
 import { poolActions } from "../../store/poolReducer"
 import { ListPicker } from "./listPicker.form"
@@ -68,6 +68,11 @@ export const PoolParams: React.FC = () => {
 					onChangeHandle={(event, value) => dispatch(poolActions.setColorFunc(Number.parseInt(value)))}
 					colorFunction={props.colorFunc}>
 				</ListPicker>
+			</ListItem>
+			<ListItem>
+				<Button onClick={(event) => dispatch(poolActions.reset())}>
+					Reset
+				</Button>
 			</ListItem>
 		</List>
 	</div>

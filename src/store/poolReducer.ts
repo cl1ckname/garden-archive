@@ -7,7 +7,9 @@ const defaultPoolSettings: PoolProps = {
 	iters: 100,
 	n: 3,
 	colorFunc: 0,
-	scale: 1
+	scale: 1,
+	x: 0,
+	y: 0,
 }
 
 export const PoolSlice = createSlice({
@@ -32,6 +34,12 @@ export const PoolSlice = createSlice({
 		setScale: (state, payload: PayloadAction<number>) => {
 			state.scale = payload.payload
 		},
+		setPoint: (state, payload: PayloadAction<{x: number, y: number}>) => {
+			Object.assign(state, payload.payload)
+		},
+		reset: (state) => {
+			Object.assign(state, defaultPoolSettings)
+		}
 	}
 })
 
