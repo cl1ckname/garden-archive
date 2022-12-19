@@ -51,18 +51,6 @@ export const PoolParams: React.FC = () => {
 				</Slider>
 			</ListItem>
 			<ListItem>
-				<ListItemText> Scale </ListItemText>
-				<Slider 
-					step={1}
-					min={1}
-					max={8}
-					marks
-					valueLabelDisplay="auto"
-					value={props.scale}
-					onChange={(event, value) => dispatch(poolActions.setScale(value as number))}>
-				</Slider>
-			</ListItem> 
-			<ListItem>
 				<ListPicker classes={{ listItemClicked: 'ActiveColor', listItemNotClicked: 'UnActiveColor' }}
 					colorList={ColorCollection}
 					onChangeHandle={(event, value) => dispatch(poolActions.setColorFunc(Number.parseInt(value)))}

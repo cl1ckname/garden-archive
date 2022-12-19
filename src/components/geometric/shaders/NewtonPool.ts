@@ -52,9 +52,10 @@ vec3 hex2rgb(int h) {
 
 void main( void ) {
 
-vec2 pos = ( gl_FragCoord.xy / resol.xy) * scale * 2.0;
-pos.x = pos.x - scale - xx;
-pos.y = pos.y - scale + yy;
+float escale = exp(scale);
+vec2 pos = ( gl_FragCoord.xy / resol.xy) * escale * 2.0;
+pos.x = pos.x - escale - xx;
+pos.y = pos.y - escale + yy;
 pos.x = pos.x*(resol.x / resol.y);
 
 vec3 color = vec3(1.0);

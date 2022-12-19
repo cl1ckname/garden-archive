@@ -1,5 +1,5 @@
 import { Stage } from "@inlet/react-pixi"
-import { useState, MouseEvent, TouchEvent } from "react";
+import { useState, MouseEvent, TouchEvent, WheelEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { poolActions } from "../../store/poolReducer";
@@ -49,16 +49,22 @@ export const PoolCanvas: React.FC = () => {
 		dispatch(poolActions.setPoint(curPoint))
 	}
 	function onDrag(event: DeviceEvent) {
+		const scale = Math.exp(poolProps.scale)
 		if (isDrag) {
 			pointEnd = getEventPoint(event)
-			const delta = {x: (pointEnd.x - pointStart.x) * poolProps.scale * 2, y: (pointEnd.y - pointStart.y) * poolProps.scale * 2}
+			const delta = {x: (pointEnd.x - pointStart.x) * scale * 2, y: (pointEnd.y - pointStart.y) * scale * 2}
 			curPoint = pointSum(curPoint, delta);
-			if (Math.abs(delta.x) > 0.02 || Math.abs(delta.y) > 0.02) {
+			// if (Math.abs(delta.x) > (scale) || Math.abs(delta.y) > (scale)) {
 				dispatch(poolActions.setPoint(curPoint))
 				setPointStart(pointEnd)
-			}
+			// }
 		}
 		
+	}
+
+	function onScroll(event: WheelEvent) {
+		const scale =event.deltaY / window.innerHeight
+		dispatch(poolActions.setScale(poolProps.scale + scale))
 	}
 
 	return <Stage options={{ backgroundAlpha: 0 }}
@@ -68,6 +74,7 @@ export const PoolCanvas: React.FC = () => {
 		onTouchMove={onDrag}
 		onMouseUp={onDrugEnd}
 		onTouchEnd={onDrugEnd}
+		onWheel={onScroll}
 		width={window.innerWidth}
 		height={window.innerHeight}>
             {/* <Viewport width={window.innerWidth} height={window.innerHeight}> */}
