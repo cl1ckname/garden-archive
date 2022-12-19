@@ -26,7 +26,7 @@ const defaultTreeSettings: TreeCanvasProps = {
 
 export const treeSlice = createSlice({
 	name: 'treeSlice',
-	initialState: Store.get('treeSettings', defaultTreeSettings),
+	initialState: Store.get('treeSettings', defaultTreeSettings) as TreeCanvasProps,
 	reducers: {
 		treeSettings: (state, payload: PayloadAction<TreeDrawParams>) => {
 			Object.assign(state.drawProps, payload.payload)

@@ -1,8 +1,7 @@
 import { List, ListItemText, ListItem, Slider, Grid, Checkbox, FormControlLabel } from "@material-ui/core"
-import { ChangeEvent, useEffect } from "react"
+import { useEffect } from "react"
 import Store from "store"
 import { ColorCollection } from "../../services/colorFunctionCollection"
-import { TreeDrawParams, TreeRenderParams } from "../canvas/treeCanvas.component"
 import { ListPicker } from "./listPicker.form"
 import { useSelector, useDispatch } from 'react-redux'
 import { treeActions } from "../../store/treeReducer"
@@ -10,12 +9,6 @@ import { RootState } from "../../store"
 
 
 
-export interface TreeFormProps {
-    drawProps: TreeDrawParams
-    renderParams: TreeRenderParams
-    drawChangeHandler: (event: ChangeEvent<{}>, value: number, type: keyof TreeDrawParams) => void
-    renderChangeHandler: (event: ChangeEvent<{}>, value: number, type: keyof TreeRenderParams) => void
-}
 export const TreeParams: React.FC = () => {
     const dispatch = useDispatch()
     const props = useSelector((state: RootState) => state.tree)

@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react"
 import { AttractCanvas, AttractDrawProps } from "../canvas/attractCanvas.component"
 import { Settings } from "../settings.component"
 import Store from "store"
-import { AttractParams } from "../forms/attract.Params.from"
+import { AttractParams } from "../forms/attractParams.form"
 import { generatePoints } from "../../services/attractGeneratePoints"
 
 const wh = window.innerHeight

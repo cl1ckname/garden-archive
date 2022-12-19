@@ -10,7 +10,7 @@ import { Accordion,
     FormControl } from "@material-ui/core"
 import React, { ChangeEvent } from "react";
 import { ColorCollectionElement } from "../../services/colorFunctionCollection";
-import { ExpandMore, Done, ColorLens } from "@material-ui/icons";
+import { ExpandMore, } from "@material-ui/icons";
 import { ColorPickerRadio } from "./inputs/ColorSchemeRadio";
 
 export interface ListPickerProps {
@@ -22,11 +22,9 @@ export interface ListPickerProps {
 
 
 export const ListPicker: React.FC<ListPickerProps> = (props: ListPickerProps) => {
-
     const { classes } = props;
-
-    const listItems = props.colorList.map((item) => (
-            <><ListItem key={item.name} className={
+    const listItems = props.colorList.map((item) => {
+            return <><ListItem key={item.name} className={
                                 props.colorFunction === item.id
                                 ? classes.listItemClicked
                                 : classes.listItemNotClicked
@@ -41,7 +39,7 @@ export const ListPicker: React.FC<ListPickerProps> = (props: ListPickerProps) =>
                         style={{ width: '100%' }}/>
                 </ListItem>
             <Divider /></>
-    ))
+    })
 
     return <FormControl style={{ width: '100%' }}>
         <Accordion style={{backgroundColor: 'rgba(255, 255, 255, 0.3)'}}>

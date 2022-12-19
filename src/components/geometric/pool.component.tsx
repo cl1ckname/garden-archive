@@ -1,9 +1,11 @@
 import { Graphics } from "@inlet/react-pixi";
 import * as Pixi from "pixi.js";
 import { useCallback } from "react";
+import { ColorCollection } from "../../services/colorFunctionCollection";
 import { getComplexRoots } from "../../services/complexAlgebra";
+import { PoolProps } from "../canvas/poolCanvas.component";
 
-export const Pool: React.FC = () => {
+export const Pool: React.FC<PoolProps> = (props: PoolProps) => {
     const mesh = `
 	
 
@@ -15,7 +17,11 @@ export const Pool: React.FC = () => {
 	uniform float scale;
 	uniform float roots[12];
 
-	const int MAX_ITS = 80;
+	uniform int colors[12];
+
+	uniform int max_its;
+
+	const int MAX_ITS = 300;
 
 	vec2 cmul(vec2 x, vec2 y) {
 		return vec2(x.x * y.x - x.y * y.y, x.x * y.y + x.y * y.x);
@@ -41,7 +47,14 @@ export const Pool: React.FC = () => {
 	}
 
 	float cdist(vec2 x, vec2 y) {
-		return (x.x - y.x) * (x.x - y.x) + (x.y - y.y) * (x.y - y.y);
+		return length((x-y));
+	}
+
+	vec3 hex2rgb(int h) {
+		float rIntValue = mod(float(h / 256 / 256), 256.) / 255.;
+		float gIntValue = mod(float(h / 256      ), 256.) / 255.;
+		float bIntValue = mod(float(h            ), 256.) / 255.;
+		return vec3(rIntValue, gIntValue, bIntValue);
 	}
 
 	void main( void ) {
@@ -55,25 +68,32 @@ export const Pool: React.FC = () => {
 	
 	vec2 zi = pos;
 	for (int i = 0; i < MAX_ITS; i++) {
+		if (i == max_its) {break;}
 		zi = zi - cdiv(cpow(zi, n) - vec2(1), float(n) * cpow(zi, n-1));
 	}
 	color = vec3(length(zi));
 
-	int mi = 1;
-	float md =  cdist(transform(roots[1]), pos);
+	int mi = 0;
+	float md =  cdist(transform(roots[0]), zi);
 	for (int i = 0; i < MAX_ITS; i++) {
 		if (i == n) { break; }
 
 		vec2 point = transform(roots[i]);
 
 		float dst = cdist(point, zi);
-		if (dst <= md) {
+		if (dst < md) {
 			md = dst;
 			mi = i;
 		}
 	}
 
-	color = vec3(float(mi) * 0.3);
+	// color = vec3(float(mi) / float(n));
+	for (int i = 0; i < 12; i++) {
+		if (i == mi) {
+			color = hex2rgb(colors[i]);
+			break;
+		}
+	}
 
 	for (int i = 0; i < MAX_ITS; i++) {
 		if (i == n) { break; }
@@ -86,27 +106,34 @@ export const Pool: React.FC = () => {
 
 	// float d = cdist(pos, vec2(0.));
 	// if (d >= 0.99 && d <= 1.01 ) { color = vec3(1.);}
+	// if ( colo[0].x >= -0.1 ) { color = vec3(1.);}
 
 
 	gl_FragColor = vec4(color, v);
 
 	}
 	`;
-	const n = 3
-	const roots = getComplexRoots(n)
-	console.log(roots)
+	const n = props.n
+	const roots = getComplexRoots(n, props.angle)
+	const colorF = ColorCollection[props.colorFunc].func
+	const colors = []
+	for (let i = 0; i < n; i++) {
+		colors.push(colorF("primary", i, n))
+	}
     const uniforms = {
         resol: [window.innerWidth, window.innerHeight],
         v: 1,
         n: n,
         scale: 2,
-		roots: roots
+		roots: roots,
+		max_its: props.iters,
+		colors,
     };
     const draw = useCallback((g) => {
         const shad = new Pixi.Filter(undefined, mesh, uniforms);
         g.clear();
         g.drawRect(0, 0, window.innerWidth, window.innerHeight);
         g.filters = [shad];
-    }, []);
+    }, [props]);
     return <Graphics draw={draw} />;
 };

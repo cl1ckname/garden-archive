@@ -27,6 +27,7 @@ export const cardStyle: CSS.Properties = {
     marginRight: '1.5em',
     top: '1em',
     left: '1.5em',
+    minWidth: '30%',
     
 }
 
