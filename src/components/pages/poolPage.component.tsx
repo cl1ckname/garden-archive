@@ -3,7 +3,7 @@ import { PoolParams } from "../forms/poolParams.form"
 import { Settings } from "../settings.component"
 
 export const PoolPage: React.FC = () => {
-	document.title = 'New page'
+	document.title = 'Newton pool'
 	return <>
 		<PoolCanvas/>
 		<Settings> <PoolParams /> </Settings>

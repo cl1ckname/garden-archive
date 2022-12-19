@@ -1,4 +1,4 @@
-import { Card, List, ListItem, ListItemText, Divider, Typography } from "@material-ui/core"
+import { Card, List, ListItem, ListItemText, Typography } from "@material-ui/core"
 import CSS from 'csstype'
 import { Link } from "react-router-dom"
 
@@ -41,9 +41,6 @@ const listHeadder: CSS.Properties = {
     color: 'white',
     marginBottom: '0.6em'
 }
-const listDivider: CSS.Properties = {
-    backgroundColor: '#000000'
-}
 
 export const FractalMenu: React.FC = () => {
     return <Card style={cardStyle}>
@@ -74,10 +71,10 @@ export const FractalMenu: React.FC = () => {
                     </ListItemText>
                 </ListItem>
             </Link>
-            <Link to='/new' style={undecoratedText}>
+            <Link to='/pool' style={undecoratedText}>
                 <ListItem style={listCard}>
                     <ListItemText>
-                        <Typography style ={cardText} variant="h5"> NEW </Typography>
+                        <Typography style ={cardText} variant="h5"> NEWTON POOL </Typography>
                     </ListItemText>
                 </ListItem>
             </Link>

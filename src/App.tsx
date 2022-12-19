@@ -21,7 +21,7 @@ function App() {
 				<Route path='/attract' element={
 					<AttractPage/>
 				} />
-				<Route path='/new' element={
+				<Route path='/pool' element={
 					<PoolPage/>
 				} />
 			</Routes>
