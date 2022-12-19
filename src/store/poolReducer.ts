@@ -7,6 +7,7 @@ const defaultPoolSettings: PoolProps = {
 	iters: 100,
 	n: 3,
 	colorFunc: 0,
+	scale: 1
 }
 
 export const PoolSlice = createSlice({
@@ -27,7 +28,10 @@ export const PoolSlice = createSlice({
 		},
 		setColorFunc: (state, payload: PayloadAction<number>) => {
 			state.colorFunc = payload.payload
-		}
+		},
+		setScale: (state, payload: PayloadAction<number>) => {
+			state.scale = payload.payload
+		},
 	}
 })
 

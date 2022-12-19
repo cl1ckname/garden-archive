@@ -8,6 +8,7 @@ export interface PoolProps {
 	iters: number,
 	angle: number,
 	colorFunc: number,
+	scale: number,
 }
 
 export const PoolCanvas: React.FC = () => {
@@ -16,7 +17,12 @@ export const PoolCanvas: React.FC = () => {
 		width={window.innerWidth}
 		height={window.innerHeight}>
             {/* <Viewport width={window.innerWidth} height={window.innerHeight}> */}
-                <Pool angle={poolProps.angle} iters={poolProps.iters} n={poolProps.n} colorFunc={poolProps.colorFunc} />
+                <Pool 
+					angle={poolProps.angle} 
+					iters={poolProps.iters} 
+					n={poolProps.n} 
+					colorFunc={poolProps.colorFunc} 
+					scale={poolProps.scale}/>
             {/* </Viewport> */}
 	</Stage>
 

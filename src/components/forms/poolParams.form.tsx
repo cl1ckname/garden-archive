@@ -44,8 +44,22 @@ export const PoolParams: React.FC = () => {
 					step={1}
 					min={1}
 					max={12}
+					marks
+					valueLabelDisplay="auto"
 					value={props.n}
 					onChange={(event, value) => dispatch(poolActions.setN(value as number))}>
+				</Slider>
+			</ListItem>
+			<ListItem>
+				<ListItemText> Scale </ListItemText>
+				<Slider 
+					step={1}
+					min={1}
+					max={8}
+					marks
+					valueLabelDisplay="auto"
+					value={props.scale}
+					onChange={(event, value) => dispatch(poolActions.setScale(value as number))}>
 				</Slider>
 			</ListItem> 
 			<ListItem>

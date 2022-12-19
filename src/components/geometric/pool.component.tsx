@@ -124,7 +124,7 @@ export const Pool: React.FC<PoolProps> = (props: PoolProps) => {
         resol: [window.innerWidth, window.innerHeight],
         v: 1,
         n: n,
-        scale: 2,
+        scale: props.scale,
 		roots: roots,
 		max_its: props.iters,
 		colors,
