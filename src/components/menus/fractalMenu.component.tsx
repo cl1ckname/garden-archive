@@ -78,6 +78,13 @@ export const FractalMenu: React.FC = () => {
                     </ListItemText>
                 </ListItem>
             </Link>
+            <Link to='/mandelbrot' style={undecoratedText}>
+                <ListItem style={listCard}>
+                    <ListItemText>
+                        <Typography style ={cardText} variant="h5"> MANDELBROT SET </Typography>
+                    </ListItemText>
+                </ListItem>
+            </Link>
         </List>
     </Card>
 }

@@ -6,6 +6,7 @@ import { BurgerMenu } from './components/menus/burgerMenu.component';
 import { AttractPage } from './components/pages/attractPage.component';
 import { FractalMenu } from './components/menus/fractalMenu.component';
 import { PoolPage } from './components/pages/poolPage.component';
+import { MandelbrotPage } from './components/pages/mandelbrotPage.component';
 
 function App() {
 	return <div className="App">
@@ -23,6 +24,9 @@ function App() {
 				} />
 				<Route path='/pool' element={
 					<PoolPage/>
+				} />
+				<Route path='/mandelbrot' element={
+					<MandelbrotPage/>
 				} />
 			</Routes>
 			<BurgerMenu>
