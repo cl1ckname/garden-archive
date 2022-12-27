@@ -5,7 +5,9 @@ import Store from "store"
 const defaultMandelbrotSettings: MandelbrotProps = {
 	x: 0,
 	y: 0,
-	scale: 1
+	scale: 1,
+	n: 2000,
+	colorFunc: 1,
 }
 
 export const MandelbrotSlice = createSlice({
@@ -17,6 +19,12 @@ export const MandelbrotSlice = createSlice({
 		},
 		setScale: (state, payload: PayloadAction<number>) => {
 			state.scale = payload.payload
+		},
+		setN: (state, payload: PayloadAction<number>) => {
+			state.n = payload.payload
+		},
+		setColorFunc: (state, payload: PayloadAction<number>) => {
+			state.colorFunc = payload.payload
 		},
 		reset: (state) => {
 			Object.assign(state, defaultMandelbrotSettings)

@@ -31,6 +31,8 @@ export const MandelbrotCanvas: React.FC = () => {
 				x={mandelbrotProps.x}
 				y={mandelbrotProps.y}
 				scale={mandelbrotProps.scale}
+				n={mandelbrotProps.n}
+				colorFunc={mandelbrotProps.colorFunc}
 			/>
 		</ShaderViewport>
 	)

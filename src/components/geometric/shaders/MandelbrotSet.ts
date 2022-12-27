@@ -33,7 +33,7 @@ void main( void ) {
 	
 	int mi;
 	for (int i = 0; i < max_iters; i++) {
-		if (zi.x*zi.x + zi.y*zi.y >= 4.) {break;}
+		if (zi.x*zi.x + zi.y*zi.y >= 4. / escale) {break;}
 		zi = cmul(zi, zi) + c;
 		mi = i;
 	}
@@ -47,7 +47,7 @@ void main( void ) {
 		}
 	}
 	// color = vec3(float(mi) / float(max_iters));
-	if (c.x  < 0.2 && c.x > -0.2 && c.y < 0.2 * escale && c.y > -0.2 * escale) {color = vec3(1., 0, 0);}
+	// if (c.x  < 0.2 && c.x > -0.2 && c.y < 0.2 * escale && c.y > -0.2 * escale) {color = vec3(1., 0, 0);}
 	gl_FragColor = vec4( color, 1.0 );
 }
 `

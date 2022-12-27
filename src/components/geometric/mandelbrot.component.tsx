@@ -7,11 +7,13 @@ import { ColorCollection } from "../../services/colorFunctionCollection"
 export interface MandelbrotProps {
 	x: number,
 	y: number,
-	scale: number
+	scale: number,
+	colorFunc: number,
+	n: number
 }
 
 function getColorList(props: MandelbrotProps) {
-	const colorF = ColorCollection[12].func;
+	const colorF = ColorCollection[props.colorFunc].func;
 	const colors = [];
 	for (let i = 0; i < 12; i++) {
 		colors.push(colorF("primary", i, 12));
@@ -21,14 +23,14 @@ function getColorList(props: MandelbrotProps) {
 
 export const Mandelbrot: React.FC<MandelbrotProps> = (props: MandelbrotProps) => {
 	
-	const uniforms = {
-		resol: [window.innerWidth, window.innerHeight],
-		xx: props.x,
-		yy: props.y,
-		scale: props.scale,
-		colors: getColorList(props),
-	}
 	const draw = useCallback((g) => {
+		const uniforms = {
+			resol: [window.innerWidth, window.innerHeight],
+			xx: props.x,
+			yy: props.y,
+			scale: props.scale,
+			colors: getColorList(props),
+		}
 		const shad = new Pixi.Filter(undefined, MandelbrotSet, uniforms)
 		g.clear()
 		g.drawRect(0, 0, window.innerWidth, window.innerHeight)
